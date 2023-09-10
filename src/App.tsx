@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { TopNavbar } from './components/top-navbar/TopNavbar';
 import CustomerContainer from './components/customer/CustomerContainer';
-import QuoteContainer from './components/quote/QuoteContainer';
+import QuotesContainer from './components/quote/QuotesContainer';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Row>
           <Col>
             <CustomerContainer />
-            <QuoteContainer />
+            <QuotesContainer />
           </Col>
         </Row>
       </Container>
