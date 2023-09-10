@@ -15,30 +15,26 @@ type Customer = {
 
 type Customers = { [key: string]: Customer };
 
-type Slot = Customer;
-
 const CustomerContainer = () => {
   // set up key for slots components
   const [customers, setCustomers] = useState<Customers>({});
-
-  const [nextCustomerId, setNextCustomerId] = useState(10);
+  const [nextCustomerId, setNextCustomerId] = useState(0);
 
   // Add a player slot to the form
   const handleAddCustomerSlot = () => {
-    const newSlot: Slot = {
-      customer_id: nextCustomerId,
-      first_name: '', // Initialize the properties with default values
+    const newCustomer: Customer = {
+      customer_id: Number(nextCustomerId),
+      first_name: '',
       initials: '',
       last_name: '',
       dob: '',
       nationality: '',
       residence_country: '',
     };
+    const updatedCustomers = { ...customers };
+    updatedCustomers[String(nextCustomerId)] = newCustomer;
+    setCustomers(updatedCustomers);
     setNextCustomerId(nextCustomerId + 1);
-    setCustomers((prevCustomers) => ({
-      ...prevCustomers,
-      [nextCustomerId]: newSlot, // Assign the new customer using the nextCustomerId as the key
-    }));
   };
 
   /**
@@ -51,6 +47,16 @@ const CustomerContainer = () => {
     setCustomers(updatedCustomers);
   };
 
+  /**
+   * Update customer dict
+   * @param e Customer data to update
+   */
+  const handleUpdate = (e: any) => {
+    const updatedCustomers = { ...customers };
+    updatedCustomers[e.customer_id] = e;
+    setCustomers(updatedCustomers);
+  };
+
   // Return ------------------
   return (
     <div className={`${appStyles.Box} mb-2 p-3`}>
@@ -58,9 +64,10 @@ const CustomerContainer = () => {
       {Object.values(customers).map((customer, i) => (
         <CustomerInput
           key={customer.customer_id}
-          id={i}
+          id={customer.customer_id}
           data={customer}
           onRemoveCustomerSlot={handleRemoveCustomerSlot}
+          onUpdate={handleUpdate}
         />
       ))}
 
