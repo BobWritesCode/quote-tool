@@ -6,6 +6,7 @@ import productsData from '../../data/products.json';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
+import { useCustomerData } from '../../contexts/CustomerDataContext';
 
 interface ProductData {
   [key: string]: any;
@@ -23,6 +24,8 @@ type Props = {
 
 const QuoteContainer = (props: Props) => {
   const { quoteData, onAddQuoteSlot, onRemoveQuoteSlot } = props;
+
+  const CustomerData = useCustomerData();
 
   const wasStartDateSelected = useRef(false);
 
