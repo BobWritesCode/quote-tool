@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import appStyles from '../../styles/App.module.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -6,7 +6,7 @@ import productsData from '../../data/products.json';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
-import { useCustomerData } from '../../contexts/CustomerDataContext';
+import { CustomerContext } from '../../contexts/CustomerDataContext';
 
 interface ProductData {
   [key: string]: any;
@@ -25,9 +25,9 @@ type Props = {
 const QuoteContainer = (props: Props) => {
   const { quoteData, onAddQuoteSlot, onRemoveQuoteSlot } = props;
 
-  const CustomerData = useCustomerData();
-
   const wasStartDateSelected = useRef(false);
+
+  const { customerData } = useContext(CustomerContext);
 
   const data: ProductData = productsData;
   const [range, setRange] = useState('');

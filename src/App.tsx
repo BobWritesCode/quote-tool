@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import { TopNavbar } from './components/top-navbar/TopNavbar';
 import CustomerContainer from './components/customer/CustomerContainer';
 import QuotesContainer from './components/quote/QuotesContainer';
+import { CustomerContextProvider } from './contexts/CustomerDataContext';
 
 function App() {
   return (
@@ -17,8 +18,10 @@ function App() {
         </Row>
         <Row>
           <Col>
-            <CustomerContainer />
-            <QuotesContainer />
+            <CustomerContextProvider>
+              <CustomerContainer />
+              <QuotesContainer />
+            </CustomerContextProvider>
           </Col>
         </Row>
       </Container>

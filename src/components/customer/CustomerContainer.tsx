@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import CustomerInput from './CustomerInput';
 import appStyles from '../../styles/App.module.css';
 import Button from 'react-bootstrap/Button';
+import { CustomerContext } from '../../contexts/CustomerDataContext';
 
 type Customer = {
   customer_id: number;
@@ -13,11 +14,10 @@ type Customer = {
   residence_country: string;
 };
 
-type Customers = { [key: string]: Customer };
-
 const CustomerContainer = () => {
+  const { customerData, setCustomerData } = useContext(CustomerContext);
+
   // set up key for slots components
-  const [customers, setCustomers] = useState<Customers>({});
   const [nextCustomerId, setNextCustomerId] = useState(0);
 
   // Add a player slot to the form
@@ -31,9 +31,10 @@ const CustomerContainer = () => {
       nationality: '',
       residence_country: '',
     };
-    const updatedCustomers = { ...customers };
-    updatedCustomers[String(nextCustomerId)] = newCustomer;
-    setCustomers(updatedCustomers);
+    // Update customerData using the numeric key
+    const updatedCustomers = { ...customerData };
+    updatedCustomers[nextCustomerId] = newCustomer;
+    setCustomerData(updatedCustomers);
     setNextCustomerId(nextCustomerId + 1);
   };
 
@@ -42,9 +43,9 @@ const CustomerContainer = () => {
    * @param e Customer ID to remove
    */
   const handleRemoveCustomerSlot = (e: any) => {
-    const updatedCustomers = { ...customers };
+    const updatedCustomers = { ...customerData };
     delete updatedCustomers[e];
-    setCustomers(updatedCustomers);
+    setCustomerData(updatedCustomers);
   };
 
   /**
@@ -52,16 +53,16 @@ const CustomerContainer = () => {
    * @param e Customer data to update
    */
   const handleUpdate = (e: any) => {
-    const updatedCustomers = { ...customers };
+    const updatedCustomers = { ...customerData };
     updatedCustomers[e.customer_id] = e;
-    setCustomers(updatedCustomers);
+    setCustomerData(updatedCustomers);
   };
 
   // Return ------------------
   return (
     <div className={`${appStyles.Box} mb-2 p-3`}>
       {/* Show customer slots */}
-      {Object.values(customers).map((customer, i) => (
+      {Object.values(customerData).map((customer, i) => (
         <CustomerInput
           key={customer.customer_id}
           id={customer.customer_id}

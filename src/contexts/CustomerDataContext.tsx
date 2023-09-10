@@ -1,21 +1,37 @@
-import { createContext, useContext, useState, ReactNode  } from 'react';
+import { createContext, useState, ReactNode } from 'react';
 
-const CustomerDataContext = createContext({});
-const SetCustomerDataContext = createContext({});
+type Customer = {
+  customer_id: number;
+  first_name: string;
+  initials: string;
+  last_name: string;
+  dob: string;
+  nationality: string;
+  residence_country: string;
+};
 
-export const useCustomerData = () => useContext(CustomerDataContext);
-export const useSetCustomerData = () => useContext(SetCustomerDataContext);
+type Customers = { [key: string]: Customer };
 
-export const CustomerDataProvider = ({ children }: { children: ReactNode }) => {
-  const [customerData, setCustomerData] = useState({
-    Customers: { results: [] },
-  });
+type CustomerContextType = {
+  customerData: Customers;
+  setCustomerData: React.Dispatch<any>;
+};
+
+export const CustomerContext = createContext<CustomerContextType>({
+  customerData: {},
+  setCustomerData: () => {},
+});
+
+export const CustomerContextProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const [customerData, setCustomerData] = useState<Customers>({});
 
   return (
-    <CustomerDataContext.Provider value={customerData}>
-      <SetCustomerDataContext.Provider value={{ setCustomerData }}>
-        {children}
-      </SetCustomerDataContext.Provider>
-    </CustomerDataContext.Provider>
+    <CustomerContext.Provider value={{ customerData, setCustomerData }}>
+      {children}
+    </CustomerContext.Provider>
   );
 };
