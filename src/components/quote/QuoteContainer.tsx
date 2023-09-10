@@ -38,6 +38,8 @@ const QuoteContainer = (props: Props) => {
   const currencies = ['GBP', 'EUR', 'USD'];
   const [currency, setCurrency] = useState('GBP');
 
+  const paymentFrequencies = ['Monthly', 'Quarterly', 'Annual'];
+  const [paymentFrequency, setPaymentFrequency] = useState('Monthly');
 
   const handleRangeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRange(e.target.value);
@@ -116,6 +118,23 @@ const QuoteContainer = (props: Props) => {
                     value={key}
                     checked={currency === key}
                     onChange={(e) => setCurrency(e.currentTarget.value)}
+                  >
+                    {key}
+                  </ToggleButton>
+                ))}
+              </ButtonGroup>
+
+              <ButtonGroup className="me-2">
+                {paymentFrequencies.map((key, idx) => (
+                  <ToggleButton
+                    key={idx}
+                    id={`paymentFrequency-${idx}`}
+                    type="radio"
+                    variant={'outline-secondary'}
+                    name={key}
+                    value={key}
+                    checked={paymentFrequency === key}
+                    onChange={(e) => setPaymentFrequency(e.currentTarget.value)}
                   >
                     {key}
                   </ToggleButton>
