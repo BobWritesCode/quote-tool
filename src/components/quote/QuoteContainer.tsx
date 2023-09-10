@@ -28,7 +28,6 @@ const QuoteContainer = (props: Props) => {
 
   const data: ProductData = productsData;
   const [range, setRange] = useState('');
-  const [product, setProduct] = useState('');
   const [showProductRangeSelection, SetShowProductRangeSelection] =
     useState(false);
   const currentDate = new Date(); // Create a new Date object for the current date
@@ -45,13 +44,6 @@ const QuoteContainer = (props: Props) => {
     setRange(e.target.value);
     wasStartDateSelected.current = true;
   };
-  const handleProductChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setProduct(e.target.value);
-  };
-
-  const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setStartDate(e.target.value);
-  };
 
   const handleAddQuote = () => {
     SetShowProductRangeSelection(true);
@@ -59,7 +51,6 @@ const QuoteContainer = (props: Props) => {
   };
 
   const handleRemoveQuote = () => {
-    setProduct('');
     onRemoveQuoteSlot(quoteData.temp_quote_id);
   };
 
@@ -145,7 +136,7 @@ const QuoteContainer = (props: Props) => {
         </div>
       )}
 
-      {wasStartDateSelected.current && (
+      {wasStartDateSelected.current && !range && (
         <Form.Select
           aria-label="Select product range"
           className="mb-2"
@@ -155,20 +146,6 @@ const QuoteContainer = (props: Props) => {
           <option>Select product range...</option>
           {Object.keys(data).map((key, index) => (
             <option key={index}>{key}</option>
-          ))}
-        </Form.Select>
-      )}
-
-      {range && (
-        <Form.Select
-          aria-label="Select product from range"
-          className="mb-2"
-          value={product}
-          onChange={handleProductChange}
-        >
-          <option>Select product from range...</option>
-          {data[range]?.map((item: string, index: number) => (
-            <option key={index}>{item}</option>
           ))}
         </Form.Select>
       )}
