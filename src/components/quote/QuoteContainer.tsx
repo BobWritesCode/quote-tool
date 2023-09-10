@@ -78,11 +78,15 @@ const QuoteContainer = (props: Props) => {
               name="start_date"
               placeholder="Start date"
               value={startDate}
-              onChange={handleStartDateChange}
+              onChange={(e) => setStartDate(e.currentTarget.value)}
             />
           </FloatingLabel>
 
-          <Button variant="primary" onClick={handleSetDateToToday}>
+          <Button
+            variant="primary"
+            className="me-2"
+            onClick={handleSetDateToToday}
+          >
             Today
           </Button>
 
