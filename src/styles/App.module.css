@@ -1,0 +1,16 @@
+/* Uncomment to see element outlines */
+/* * {
+  border: 1px dashed red;
+} */
+
+.App {
+  background-color: rgb(200, 200, 200);
+  min-height: 100vh;
+  padding: 0;
+}
+
+.Box {
+  background-color: rgb(236, 236, 236);
+  border: 1px solid blue;
+
+}
