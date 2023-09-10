@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import productsData from '../../data/products.json';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
 
 interface ProductData {
   [key: string]: any;
@@ -32,6 +34,10 @@ const QuoteContainer = (props: Props) => {
   const currentDate = new Date(); // Create a new Date object for the current date
   const formattedCurrentDate = currentDate.toISOString().substr(0, 10); // Format it as "YYYY-MM-DD"
   const [startDate, setStartDate] = useState('');
+
+  const currencies = ['GBP', 'EUR', 'USD'];
+  const [currency, setCurrency] = useState('GBP');
+
 
   const handleRangeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRange(e.target.value);
@@ -86,6 +92,37 @@ const QuoteContainer = (props: Props) => {
           <Button variant="primary" onClick={handleSetDateToToday}>
             Today
           </Button>
+
+          {range && (
+            <Button
+              as="input"
+              type="button"
+              value={range}
+              variant="secondary"
+              className="me-2"
+            />
+          )}
+
+          {range && (
+            <>
+              <ButtonGroup className="me-2">
+                {currencies.map((key, idx) => (
+                  <ToggleButton
+                    key={idx}
+                    id={`currency-${idx}`}
+                    type="radio"
+                    variant={'outline-secondary'}
+                    name={key}
+                    value={key}
+                    checked={currency === key}
+                    onChange={(e) => setCurrency(e.currentTarget.value)}
+                  >
+                    {key}
+                  </ToggleButton>
+                ))}
+              </ButtonGroup>
+            </>
+          )}
         </div>
       )}
 
