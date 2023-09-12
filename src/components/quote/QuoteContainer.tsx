@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState, useEffect } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import appStyles from '../../styles/App.module.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -25,11 +25,8 @@ type Props = {
 
 const QuoteContainer = (props: Props) => {
   const { quoteData, onAddQuoteSlot, onRemoveQuoteSlot } = props;
-
   const wasStartDateSelected = useRef(false);
-
   const { customerData } = useContext(CustomerContext);
-
   const products: ProductData = productsData;
   const [range, setRange] = useState('');
   const [showProductRangeSelection, SetShowProductRangeSelection] =

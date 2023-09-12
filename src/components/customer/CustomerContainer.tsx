@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
-import CustomerInput from './CustomerInput';
+import CustomerInputLine from './CustomerInputLine';
 import appStyles from '../../styles/App.module.css';
 import Button from 'react-bootstrap/Button';
 import { CustomerContext } from '../../contexts/CustomerDataContext';
+import customerFieldsData from '../../data/customer_fields.json';
+import Table from 'react-bootstrap/Table';
 
 type Customer = {
   customer_id: number;
@@ -43,8 +45,10 @@ const CustomerContainer = () => {
    * @param e Customer ID to remove
    */
   const handleRemoveCustomerSlot = (e: any) => {
+    console.log('REMOVED', e, customerData);
     const updatedCustomers = { ...customerData };
     delete updatedCustomers[e];
+    console.log('updatedCustomers', updatedCustomers);
     setCustomerData(updatedCustomers);
   };
 
@@ -52,26 +56,40 @@ const CustomerContainer = () => {
    * Update customer dict
    * @param e Customer data to update
    */
-  const handleUpdate = (e: any) => {
-    const updatedCustomers = { ...customerData };
-    updatedCustomers[e.customer_id] = e;
+  const handleUpdate = (
+    targetId: number,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const updatedCustomers: any = { ...customerData };
+    const fieldName = e.target.name as keyof Customer;
+    const fieldValue = e.target.value;
+    updatedCustomers[targetId][fieldName] = fieldValue;
     setCustomerData(updatedCustomers);
   };
 
   // Return ------------------
   return (
     <div className={`${appStyles.Box} mb-2 p-3`}>
-      {/* Show customer slots */}
-      {Object.values(customerData).map((customer, i) => (
-        <CustomerInput
-          key={customer.customer_id}
-          id={customer.customer_id}
-          data={customer}
-          onRemoveCustomerSlot={handleRemoveCustomerSlot}
-          onUpdate={handleUpdate}
-        />
-      ))}
-
+      <Table striped bordered hover size="sm">
+        <thead>
+          <tr>
+            {Object.values(customerFieldsData).map((key, index) => (
+              <th key={index}>{key[0]}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {Object.values(customerData).map((customer, ind) => (
+            <CustomerInputLine
+              key={ind}
+              customer={customer}
+              customerId={nextCustomerId}
+              onRemoveCustomerSlot={handleRemoveCustomerSlot}
+              onUpdate={(targetId, e) => handleUpdate(targetId, e)}
+            />
+          ))}
+        </tbody>
+      </Table>
       {/* Add person button */}
       <Button variant="primary" onClick={handleAddCustomerSlot}>
         Add person
