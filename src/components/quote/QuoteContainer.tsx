@@ -44,8 +44,8 @@ const QuoteContainer = (props: Props) => {
   const paymentFrequencies = ['Monthly', 'Quarterly', 'Annual'];
   const [paymentFrequency, setPaymentFrequency] = useState('Monthly');
 
-  const handleRangeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setRange(e.target.value);
+  const handleRangeChange = (key: string) => {
+    setRange(key);
     wasStartDateSelected.current = true;
   };
 
@@ -145,19 +145,19 @@ const QuoteContainer = (props: Props) => {
         </div>
       )}
 
-      {wasStartDateSelected.current && !range && (
-        <Form.Select
-          aria-label="Select product range"
-          className="mb-2"
-          onChange={handleRangeChange}
-          value={range}
-        >
-          <option>Select product range...</option>
-          {Object.keys(products).map((key, index) => (
-            <option key={index}>{key}</option>
-          ))}
-        </Form.Select>
-      )}
+      {wasStartDateSelected.current &&
+        !range &&
+        Object.keys(products).map((key, index) => (
+          <Button
+            key={index}
+            variant="success"
+            onClick={() => handleRangeChange(key)}
+            className="me-2"
+            value={key}
+          >
+            {key}
+          </Button>
+        ))}
 
       {range && (
         <Table striped bordered hover size="sm">
