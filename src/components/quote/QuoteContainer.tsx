@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState, useEffect } from 'react';
 import appStyles from '../../styles/App.module.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,6 +7,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { CustomerContext } from '../../contexts/CustomerDataContext';
+import Table from 'react-bootstrap/Table';
 
 interface ProductData {
   [key: string]: any;
@@ -29,7 +30,7 @@ const QuoteContainer = (props: Props) => {
 
   const { customerData } = useContext(CustomerContext);
 
-  const data: ProductData = productsData;
+  const products: ProductData = productsData;
   const [range, setRange] = useState('');
   const [showProductRangeSelection, SetShowProductRangeSelection] =
     useState(false);
@@ -61,6 +62,7 @@ const QuoteContainer = (props: Props) => {
     setStartDate(formattedCurrentDate);
     wasStartDateSelected.current = true;
   };
+
   return (
     <div className={`${appStyles.Box} mb-2 p-3`}>
       {!showProductRangeSelection && (
@@ -151,10 +153,43 @@ const QuoteContainer = (props: Props) => {
           value={range}
         >
           <option>Select product range...</option>
-          {Object.keys(data).map((key, index) => (
+          {Object.keys(products).map((key, index) => (
             <option key={index}>{key}</option>
           ))}
         </Form.Select>
+      )}
+
+      {range && (
+        <Table striped bordered hover size="sm">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Residence</th>
+              <th>Plan</th>
+              <th>Quote</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.values(customerData).map((customer, i) => (
+              <tr key={i}>
+                <td>
+                  {customer.first_name} {customer.initials} {customer.last_name}{' '}
+                </td>
+                <td>{customer.dob}</td>
+                <td>{customer.residence_country}</td>
+                <td>
+                  <Form.Select aria-label="Select product">
+                    {(products[range] as string[]).map((key, index) => (
+                      <option key={index}>{key}</option>
+                    ))}
+                  </Form.Select>
+                </td>
+                <td></td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       )}
 
       {showProductRangeSelection && (
