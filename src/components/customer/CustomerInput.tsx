@@ -36,11 +36,14 @@ const CustomerInput = (props: Props) => {
 
   // Allow user to edit form.
   const handleChange = (e: any) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    setFormData((prevFormData) => {
+      const updatedFormData = {
+        ...prevFormData,
+        [e.target.name]: e.target.value,
+      };
+      onUpdate(updatedFormData);
+      return updatedFormData;
     });
-    onUpdate(formData);
   };
 
   // Remove customer slot
