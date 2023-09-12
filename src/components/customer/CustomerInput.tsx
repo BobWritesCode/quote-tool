@@ -116,9 +116,9 @@ const CustomerInput = (props: Props) => {
             aria-label="Self nationality"
             onChange={handleChange}
           >
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value=""></option>
+            <option value="British">British</option>
+            <option value="French">French</option>
           </Form.Select>
         </FloatingLabel>
         {/* Input for country of residence */}
@@ -132,9 +132,9 @@ const CustomerInput = (props: Props) => {
             aria-label="Select country of residence"
             onChange={handleChange}
           >
-            <option value="1">United Kingdom</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value=""></option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="France">France</option>
           </Form.Select>
         </FloatingLabel>
         {/* Remove person button */}
