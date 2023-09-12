@@ -52,7 +52,6 @@ const CustomerInput = (props: Props) => {
   return (
     <div>
       <Form className="d-flex mb-2">
-        {id}.{data.customer_id}
         {/* Input for first name */}
         <FloatingLabel
           controlId="floatingInput"
