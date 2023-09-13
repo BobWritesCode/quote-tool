@@ -40,8 +40,11 @@ const InputField = (props: any) => {
                 value={value}
               >
                 <option value=""></option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="France">France</option>
+                {Object.values(data[2]).map((key: any, index: number) => (
+                  <option key={index} value={key}>
+                    {key}
+                  </option>
+                ))}
               </Form.Select>
             );
           default:
