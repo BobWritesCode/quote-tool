@@ -47,8 +47,8 @@ const QuotesContainer = () => {
         <QuoteContainer
           key={quote.temp_quote_id}
           quoteData={quote}
-          onAddQuoteSlot={handleAddQuoteSlot}
-          onRemoveQuoteSlot={handleRemoveQuoteSlot}
+          onAddQuote={handleAddQuoteSlot}
+          onRemoveQuote={handleRemoveQuoteSlot}
         />
       ))}
     </div>

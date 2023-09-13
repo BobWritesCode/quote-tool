@@ -17,12 +17,13 @@ type Quote = {
 
 type Props = {
   quoteData: Quote;
-  onAddQuoteSlot: () => void;
-  onRemoveQuoteSlot: (id: number) => void;
+  onAddQuote: () => void;
+  onRemoveQuote: (customerId: number) => void;
 };
 // Main -------------------------------------------------------------
 const QuoteContainer = (props: Props) => {
   // Props -----------------------------------------------------------
+  const { quote_ref_id, onAddQuote, onRemoveQuote } = props;
   // Refs -----------------------------------------------------------
   const wasStartDateSelected = useRef(false);
   // Contexts -------------------------------------------------------
@@ -53,7 +54,7 @@ const QuoteContainer = (props: Props) => {
    */
   const handleAddQuote = () => {
     SetShowProductRangeSelection(true);
-    onAddQuoteSlot();
+    onAddQuote();
   };
   /**
    *
