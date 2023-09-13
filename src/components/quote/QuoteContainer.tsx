@@ -8,15 +8,14 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { CustomerContext } from '../../contexts/CustomerDataContext';
 // Types ------------------------------------------------------------
+type ProductData = {
   [key: string]: any;
-}
-
-type Quote = {
-  temp_quote_id: number;
 };
-
+type QuoteFields = {
+  [key: string]: any;
+};
 type Props = {
-  quoteData: Quote;
+  quote_ref_id: string;
   onAddQuote: () => void;
   onRemoveQuote: (customerId: number) => void;
 };
