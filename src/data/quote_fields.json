@@ -1,0 +1,32 @@
+{
+  "top": {
+    "start_date": ["Start date", "date", ""],
+    "product": ["Range", "buttons", ""],
+    "currency": ["Currency", "radio", "GBP"]
+  },
+  "lines": {
+    "Legacy":{
+      "first_name": ["First name", "display", ""],
+      "date_of_birth": ["Date of birth", "display", ""],
+      "residence_country": ["Country of residence", "display", ""],
+      "product": ["Product", "select", [
+        "Entry",
+        "Medium",
+        "Advanced"
+      ]],
+      "product_code": ["Product Code", "display", ""]
+    },
+    "Current":{
+      "first_name": ["First name", "display", ""],
+      "date_of_birth": ["Date of birth", "display", ""],
+      "residence_country": ["Country of residence", "display", ""],
+      "product": ["Product", "select", [
+        "Bronze",
+        "Silver",
+        "Gold",
+        "Platinum"
+      ]],
+      "product_code": ["Product Code", "display", ""]
+    }
+  }
+}
