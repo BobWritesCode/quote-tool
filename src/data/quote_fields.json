@@ -5,28 +5,19 @@
     "currency": ["Currency", "radio", "GBP"]
   },
   "lines": {
-    "Legacy":{
-      "first_name": ["First name", "display", ""],
-      "date_of_birth": ["Date of birth", "display", ""],
-      "residence_country": ["Country of residence", "display", ""],
-      "product": ["Product", "select", [
-        "Entry",
-        "Medium",
-        "Advanced"
-      ]],
-      "product_code": ["Product Code", "display", ""]
-    },
-    "Current":{
-      "first_name": ["First name", "display", ""],
-      "date_of_birth": ["Date of birth", "display", ""],
-      "residence_country": ["Country of residence", "display", ""],
-      "product": ["Product", "select", [
-        "Bronze",
-        "Silver",
-        "Gold",
-        "Platinum"
-      ]],
-      "product_code": ["Product Code", "display", ""]
-    }
+    "Legacy": [
+      ["Name", "display", ["first_name", "initials", "last_name"]],
+      ["Date of birth", "display", ["date_of_birth"]],
+      ["Country of residence", "display", ["residence_country"]],
+      ["Product", "select", ["Entry", "Medium", "Advanced"]],
+      ["Product Code", "display", [""]]
+    ],
+    "Current": [
+      ["Name", "display", ["first_name", "initials", "last_name"]],
+      ["Date of birth", "display", ["date_of_birth"]],
+      ["Country of residence", "display", ["residence_country"]],
+      ["Product", "select", ["Bronze", "Silver", "Gold", "Platinum"]],
+      ["Product Code", "display", [""]]
+    ]
   }
 }
