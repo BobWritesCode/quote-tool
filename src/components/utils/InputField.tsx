@@ -32,11 +32,7 @@ const InputField = (props: any) => {
             );
           case 'select':
             return (
-              <Form.Select
-                name={dataName}
-                aria-label="Select country of residence"
-                onChange={onUpdate}
-              >
+              <Form.Select name={dataName} onChange={onUpdate}>
                 <option value=""></option>
                 {Object.values(data[2]).map((key: any, index: number) => (
                   <option key={index} value={key}>
