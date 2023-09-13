@@ -3,10 +3,13 @@ import appStyles from '../../styles/App.module.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import productsData from '../../data/products.json';
+import quoteFieldsData from '../../data/quote_fields.json';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
+import Table from 'react-bootstrap/Table';
 import { CustomerContext } from '../../contexts/CustomerDataContext';
+import InputField from '../utils/InputField';
 // Types ------------------------------------------------------------
 type ProductData = {
   [key: string]: any;
@@ -59,6 +62,8 @@ const QuoteContainer = (props: Props) => {
   /**
    *
    */
+  const handleRemoveQuote = (e: any) => {
+    onRemoveQuote(e.target.value);
   };
   /**
    *
@@ -75,8 +80,8 @@ const QuoteContainer = (props: Props) => {
         <Button variant="success" onClick={handleAddQuote}>
           Add quote...
         </Button>
-
       )}
+
       {showProductRangeSelection && (
         <div className="d-flex mb-2">
           {/* Input for start date */}
@@ -170,29 +175,27 @@ const QuoteContainer = (props: Props) => {
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Residence</th>
-              <th>Plan</th>
-              <th>Quote</th>
+              {Object.values(quoteFields['lines'][range]).map(
+                (key: any, index: number) => (
+                  <th key={index}>{key[0]}</th>
+                ),
+              )}
             </tr>
           </thead>
           <tbody>
             {Object.values(customerData).map((customer, i) => (
               <tr key={i}>
-                <td>
-                  {customer.first_name} {customer.initials} {customer.last_name}{' '}
-                </td>
-                <td>{customer.dob}</td>
-                <td>{customer.residence_country}</td>
-                <td>
-                  <Form.Select aria-label="Select product">
-                    {(products[range] as string[]).map((key, index) => (
-                      <option key={index}>{key}</option>
-                    ))}
-                  </Form.Select>
-                </td>
-                <td></td>
+                {Object.entries(quoteFields['lines'][range]).map(
+                  ([fieldName, fieldData], index) => (
+                    <InputField
+                      key={index}
+                      dataName={fieldName}
+                      data={fieldData}
+                      value={customer[fieldName]}
+                      // onUpdate={handleChange(customer.customer_id)}
+                    />
+                  ),
+                )}
               </tr>
             ))}
           </tbody>
@@ -200,7 +203,11 @@ const QuoteContainer = (props: Props) => {
       )}
 
       {showProductRangeSelection && (
-        <Button variant="danger" onClick={handleRemoveQuote}>
+        <Button
+          variant="danger"
+          value={quote_ref_id}
+          onClick={handleRemoveQuote}
+        >
           Delete quote...
         </Button>
       )}
