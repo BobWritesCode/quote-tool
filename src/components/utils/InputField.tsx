@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 
-const CustomerInputField = (props: any) => {
+const InputField = (props: any) => {
   const { data, dataName, onUpdate, value } = props;
   return (
     <td>
@@ -42,4 +42,4 @@ const CustomerInputField = (props: any) => {
   );
 };
 
-export default CustomerInputField;
+export default InputField;

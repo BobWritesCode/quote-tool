@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import customerFieldsData from '../../data/customer_fields.json';
-import CustomerInputField from './CustomerInputField';
+import InputField from '../utils/InputField';
 
 type Customer = {
   customer_id: number;
@@ -35,7 +35,7 @@ const CustomerInputLine = (props: Props) => {
     <tr>
       {Object.entries(customerFieldsData).map(
         ([fieldName, fieldData], index) => (
-          <CustomerInputField
+          <InputField
             key={index}
             dataName={fieldName}
             data={fieldData}
