@@ -16,7 +16,7 @@ const InputField = (props: any) => {
       {(() => {
         switch (data[1]) {
           case 'display':
-            return <>{value}</>;
+            return data[2].map((key: string) => customer[key]).join(' ');
           case 'text':
             return (
               <Form.Control
