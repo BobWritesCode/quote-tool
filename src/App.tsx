@@ -20,8 +20,8 @@ function App() {
         <Row>
           <Col>
             <CustomerContextProvider>
-              <CustomerContainer />
               <QuotesContextProvider>
+                <CustomerContainer />
                 <QuotesContainer />
               </QuotesContextProvider>
             </CustomerContextProvider>

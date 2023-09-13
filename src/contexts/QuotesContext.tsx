@@ -3,14 +3,13 @@ import { createContext, useState, ReactNode } from 'react';
 // Types ------------------------------------------------------------
 type QuoteLine = {
   [key: string]: string | number;
-}
+};
 type Quote = {
-  quote_ref_id: string;
-  quoteLines: QuoteLine[];
+  [key: string]: QuoteLine[];
 };
 type Quotes = {
-  [key: string]: Quote
-}
+  [key: string]: Quote[];
+};
 type QuotesContextType = {
   quotesData: Quotes;
   setQuotesData: React.Dispatch<any>;

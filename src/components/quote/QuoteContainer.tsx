@@ -10,6 +10,8 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import Table from 'react-bootstrap/Table';
 import { CustomerContext } from '../../contexts/CustomerDataContext';
 import InputField from '../utils/InputField';
+import Price from './Price';
+import { QuotesContext } from '../../contexts/QuotesContext';
 // Types ------------------------------------------------------------
 type ProductData = {
   [key: string]: any;
@@ -22,6 +24,9 @@ type Props = {
   onAddQuote: () => void;
   onRemoveQuote: (customerId: number) => void;
 };
+type QuoteLine = {
+  [key: string]: string | number;
+};
 // Main -------------------------------------------------------------
 const QuoteContainer = (props: Props) => {
   // Props -----------------------------------------------------------
@@ -29,7 +34,8 @@ const QuoteContainer = (props: Props) => {
   // Refs -----------------------------------------------------------
   const wasStartDateSelected = useRef(false);
   // Contexts -------------------------------------------------------
-  const { customerData, setCustomerData } = useContext(CustomerContext);
+  const { customerData } = useContext(CustomerContext);
+  const { quotesData, setQuotesData } = useContext(QuotesContext);
   // Variables ------------------------------------------------------
   const [range, setRange] = useState('');
   const [showProductRangeSelection, SetShowProductRangeSelection] =
@@ -72,16 +78,29 @@ const QuoteContainer = (props: Props) => {
     setStartDate(formattedCurrentDate);
     wasStartDateSelected.current = true;
   };
+  /**
+   * Update quotes dict on change to quote.
+   */
+  const handleChange =
+    (customer: any, quote_ref_id: string) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const updatedQuotes: any = { ...quotesData };
+      const fieldName = e.target.name as keyof QuoteLine;
+      const fieldValue = e.target.value;
+      updatedQuotes[quote_ref_id][customer.customer_id][fieldName] = fieldValue;
+      setQuotesData(updatedQuotes);
+    };
   // Effects --------------------------------------------------------
   // Return ---------------------------------------------------------
   return (
     <div className={`${appStyles.Box} mb-2 p-3`}>
+      Quote ref: {quote_ref_id}
+      <br />
       {!showProductRangeSelection && (
         <Button variant="success" onClick={handleAddQuote}>
           Add quote...
         </Button>
       )}
-
       {showProductRangeSelection && (
         <div className="d-flex mb-2">
           {/* Input for start date */}
@@ -156,7 +175,6 @@ const QuoteContainer = (props: Props) => {
           )}
         </div>
       )}
-
       {wasStartDateSelected.current &&
         !range &&
         Object.keys(products).map((key, index) => (
@@ -170,7 +188,6 @@ const QuoteContainer = (props: Props) => {
             {key}
           </Button>
         ))}
-
       {range && (
         <Table striped bordered hover size="sm">
           <thead>
@@ -180,6 +197,7 @@ const QuoteContainer = (props: Props) => {
                   <th key={index}>{key[0]}</th>
                 ),
               )}
+              <td>Price</td>
             </tr>
           </thead>
           <tbody>
@@ -192,15 +210,18 @@ const QuoteContainer = (props: Props) => {
                       dataName={fieldName}
                       data={fieldData}
                       customer={customer}
+                      onUpdate={handleChange(customer, quote_ref_id)}
                     />
                   ),
                 )}
+                <td>
+                  <Price product={'Current'} quoteRefId={quote_ref_id} />
+                </td>
               </tr>
             ))}
           </tbody>
         </Table>
       )}
-
       {showProductRangeSelection && (
         <Button
           variant="danger"

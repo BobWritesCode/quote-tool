@@ -7,14 +7,17 @@ import React, {
 } from 'react';
 import QuoteContainer from './QuoteContainer';
 import { QuotesContext } from '../../contexts/QuotesContext';
+import { CustomerContext } from '../../contexts/CustomerDataContext';
 
 // Types ------------------------------------------------------------
 type QuoteLine = {
   [key: string]: string | number;
 };
 type Quote = {
-  quote_ref_id: string;
-  quoteLines: QuoteLine[];
+  [key: string]: QuoteLine[];
+};
+type Quotes = {
+  [key: string]: Quote[];
 };
 // Main -------------------------------------------------------------
 const QuotesContainer = () => {
@@ -23,6 +26,7 @@ const QuotesContainer = () => {
   const wasCalled = useRef(false); // Checks for first render
   // Contexts -------------------------------------------------------
   const { quotesData, setQuotesData } = useContext(QuotesContext);
+  const { customerData } = useContext(CustomerContext);
   // Variables ------------------------------------------------------
   // Data -----------------------------------------------------------
   const [nextTempQuoteId, setNextTempQuoteId] = useState(10);
@@ -31,16 +35,19 @@ const QuotesContainer = () => {
    *
    */
   const handleAddQuoteSlot = useCallback(() => {
-    const newQuote: Quote = {
-      quote_ref_id: String(nextTempQuoteId),
-      quoteLines: [],
-    };
+    const newQuote: Quote = Object.keys(customerData).reduce(
+      (acc: any, customerId: any) => {
+        acc[customerId] = {};
+        return acc;
+      },
+      {},
+    );
     setNextTempQuoteId(nextTempQuoteId + 1);
     setQuotesData((prevQuotes: Quote) => ({
       ...prevQuotes,
       [String(nextTempQuoteId)]: newQuote,
     }));
-  }, [nextTempQuoteId, setQuotesData]);
+  }, [nextTempQuoteId, setQuotesData, customerData]);
   /**
    *
    */
@@ -50,6 +57,7 @@ const QuotesContainer = () => {
     setQuotesData(updatedQuotes);
   };
   // Effects --------------------------------------------------------
+
   /**
    *
    */
@@ -58,15 +66,15 @@ const QuotesContainer = () => {
     if (wasCalled.current) return;
     wasCalled.current = true;
     handleAddQuoteSlot();
-  }, [handleAddQuoteSlot]);
+  });
   //  Return --------------------------------------------------------
   return (
     <div>
       {/* Show quote slots */}
-      {Object.values(quotesData).map((quote, i) => (
+      {Object.keys(quotesData).map((key, i) => (
         <QuoteContainer
-          key={quote.quote_ref_id}
-          quote_ref_id={quote.quote_ref_id}
+          key={key}
+          quote_ref_id={key}
           onAddQuote={handleAddQuoteSlot}
           onRemoveQuote={handleRemoveQuoteSlot}
         />

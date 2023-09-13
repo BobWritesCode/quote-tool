@@ -5,19 +5,40 @@
     "currency": ["Currency", "radio", "GBP"]
   },
   "lines": {
-    "Legacy": [
-      ["Name", "display", ["first_name", "initials", "last_name"]],
-      ["Date of birth", "display", ["date_of_birth"]],
-      ["Country of residence", "display", ["residence_country"]],
-      ["Product", "select", ["Entry", "Medium", "Advanced"]],
-      ["Product Code", "display", [""]]
-    ],
-    "Current": [
-      ["Name", "display", ["first_name", "initials", "last_name"]],
-      ["Date of birth", "display", ["date_of_birth"]],
-      ["Country of residence", "display", ["residence_country"]],
-      ["Product", "select", ["Bronze", "Silver", "Gold", "Platinum"]],
-      ["Product Code", "display", [""]]
-    ]
+    "Legacy": {
+      "quoteFullName": [
+        "Name",
+        "display",
+        ["first_name", "initials", "last_name"]
+      ],
+      "quoteDOB": ["Date of birth", "display", ["date_of_birth"]],
+      "quoteResidence": [
+        "Country of residence",
+        "display",
+        ["residence_country"]
+      ],
+      "quoteProduct": ["Product", "select", ["Entry", "Medium", "Advanced"]],
+      "quoteProductCode": ["Product Code", "display", [""]]
+    },
+    "Current": {
+      "quoteFullName": [
+        "Name",
+        "display",
+        ["first_name", "initials", "last_name"]
+      ],
+      "quoteDOB": ["Date of birth", "display", ["date_of_birth"]],
+      "quoteResidence": [
+        "Country of residence",
+        "display",
+        ["residence_country"]
+      ],
+      "quoteProduct": [
+        "Product",
+        "select",
+        ["Bronze", "Silver", "Gold", "Platinum"]
+      ],
+      "quoteProductCode": ["Product Code", "display", [""]],
+      "quoteLoading": ["Loading", "text", [""]]
+    }
   }
 }
