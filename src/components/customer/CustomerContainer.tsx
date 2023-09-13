@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { CustomerContext } from '../../contexts/CustomerDataContext';
 import customerFieldsData from '../../data/customer_fields.json';
 import Table from 'react-bootstrap/Table';
-
+// Types ------------------------------------------------------------
 type Customer = {
   customer_id: number;
   first_name: string;
@@ -15,14 +15,20 @@ type Customer = {
   nationality: string;
   residence_country: string;
 };
-
+// Main -------------------------------------------------------------
 const CustomerContainer = () => {
+  // Props ----------------------------------------------------------
+  // Refs -----------------------------------------------------------
+  // Contexts -------------------------------------------------------
   const { customerData, setCustomerData } = useContext(CustomerContext);
-
+  // Variables ------------------------------------------------------
   // set up key for slots components
   const [nextCustomerId, setNextCustomerId] = useState(0);
-
-  // Add a player slot to the form
+  // Data -----------------------------------------------------------
+  // Handles --------------------------------------------------------
+  /**
+   *
+   */
   const handleAddCustomerSlot = () => {
     const newCustomer: Customer = {
       customer_id: Number(nextCustomerId),
@@ -39,7 +45,6 @@ const CustomerContainer = () => {
     setCustomerData(updatedCustomers);
     setNextCustomerId(nextCustomerId + 1);
   };
-
   /**
    * Remove customer input row
    * @param e Customer ID to remove
@@ -49,7 +54,6 @@ const CustomerContainer = () => {
     delete updatedCustomers[e];
     setCustomerData(updatedCustomers);
   };
-
   /**
    * Update customer dict
    * @param e Customer data to update
@@ -64,8 +68,8 @@ const CustomerContainer = () => {
     updatedCustomers[targetId][fieldName] = fieldValue;
     setCustomerData(updatedCustomers);
   };
-
-  // Return ------------------
+  // Effects --------------------------------------------------------
+  // Return ---------------------------------------------------------
   return (
     <div className={`${appStyles.Box} mb-2 p-3`}>
       <Table striped bordered hover size="sm">
@@ -78,7 +82,6 @@ const CustomerContainer = () => {
         </thead>
         <tbody>
           {Object.values(customerData).map((customer, ind) => (
-
             <CustomerInputLine
               key={ind}
               customer={customer}

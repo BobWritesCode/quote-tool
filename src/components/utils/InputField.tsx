@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-
+// Types ------------------------------------------------------------
+// Main -------------------------------------------------------------
 const InputField = (props: any) => {
   const { data, dataName, onUpdate, value } = props;
   return (

@@ -2,35 +2,32 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import customerFieldsData from '../../data/customer_fields.json';
 import InputField from '../utils/InputField';
-
+// Types ------------------------------------------------------------
 type Customer = {
   customer_id: number;
-  first_name: string;
-  initials: string;
-  last_name: string;
-  dob: string;
-  nationality: string;
-  residence_country: string;
   [key: string]: string | number;
 };
-
 type Props = {
   customer: Customer;
   customerId: number;
   onUpdate: (targetId: number, e: React.ChangeEvent<HTMLInputElement>) => void;
   onRemoveCustomerSlot: (customerId: number) => void;
 };
-
+// Main -------------------------------------------------------------
 const CustomerInputLine = (props: Props) => {
-  const { onRemoveCustomerSlot, customer , onUpdate } = props;
-
+  // Props ----------------------------------------------------------
+  const { onRemoveCustomerSlot, customer, onUpdate } = props;
+  // Refs -----------------------------------------------------------
+  // Contexts -------------------------------------------------------
+  // Variables ------------------------------------------------------
+  // Data -----------------------------------------------------------
   // Allow user to edit form.
   const handleChange =
     (targetId: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       onUpdate(targetId, e);
     };
-
-  // Return ------------------
+  // Effects --------------------------------------------------------
+  // Return ---------------------------------------------------------
   return (
     <tr>
       {Object.entries(customerFieldsData).map(

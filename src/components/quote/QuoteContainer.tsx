@@ -7,10 +7,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { CustomerContext } from '../../contexts/CustomerDataContext';
-import quoteFields from '../../data/quote_fields.json';
-import Table from 'react-bootstrap/Table';
-
-interface ProductData {
+// Types ------------------------------------------------------------
   [key: string]: any;
 }
 
@@ -23,12 +20,13 @@ type Props = {
   onAddQuoteSlot: () => void;
   onRemoveQuoteSlot: (id: number) => void;
 };
-
+// Main -------------------------------------------------------------
 const QuoteContainer = (props: Props) => {
-  const { quoteData, onAddQuoteSlot, onRemoveQuoteSlot } = props;
+  // Props -----------------------------------------------------------
+  // Refs -----------------------------------------------------------
   const wasStartDateSelected = useRef(false);
-  const { customerData } = useContext(CustomerContext);
-  const products: ProductData = productsData;
+  // Contexts -------------------------------------------------------
+  // Variables ------------------------------------------------------
   const [range, setRange] = useState('');
   const [showProductRangeSelection, SetShowProductRangeSelection] =
     useState(false);
@@ -41,32 +39,42 @@ const QuoteContainer = (props: Props) => {
 
   const paymentFrequencies = ['Monthly', 'Quarterly', 'Annual'];
   const [paymentFrequency, setPaymentFrequency] = useState('Monthly');
-
+  // Data ----------------------------------------------------------
+  // Handles --------------------------------------------------------
+  /**
+   *
+   */
   const handleRangeChange = (key: string) => {
     setRange(key);
     wasStartDateSelected.current = true;
   };
-
+  /**
+   *
+   */
   const handleAddQuote = () => {
     SetShowProductRangeSelection(true);
     onAddQuoteSlot();
   };
-
-  const handleRemoveQuote = () => {
-    onRemoveQuoteSlot(quoteData.temp_quote_id);
+  /**
+   *
+   */
   };
-
+  /**
+   *
+   */
   const handleSetDateToToday = () => {
     setStartDate(formattedCurrentDate);
     wasStartDateSelected.current = true;
   };
-
+  // Effects --------------------------------------------------------
+  // Return ---------------------------------------------------------
   return (
     <div className={`${appStyles.Box} mb-2 p-3`}>
       {!showProductRangeSelection && (
         <Button variant="success" onClick={handleAddQuote}>
           Add quote...
         </Button>
+
       )}
       {showProductRangeSelection && (
         <div className="d-flex mb-2">
