@@ -8,12 +8,7 @@ import Table from 'react-bootstrap/Table';
 // Types ------------------------------------------------------------
 type Customer = {
   customer_id: number;
-  first_name: string;
-  initials: string;
-  last_name: string;
-  dob: string;
-  nationality: string;
-  residence_country: string;
+  [key: string]: string | number;
 };
 // Main -------------------------------------------------------------
 const CustomerContainer = () => {

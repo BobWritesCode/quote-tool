@@ -3,12 +3,7 @@ import { createContext, useState, ReactNode } from 'react';
 // types ------------------------------------------------------------
 type Customer = {
   customer_id: number;
-  first_name: string;
-  initials: string;
-  last_name: string;
-  dob: string;
-  nationality: string;
-  residence_country: string;
+  [key: string]: string | number;
 };
 type Customers = { [key: string]: Customer };
 type CustomerContextType = {
