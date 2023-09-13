@@ -45,10 +45,8 @@ const CustomerContainer = () => {
    * @param e Customer ID to remove
    */
   const handleRemoveCustomerSlot = (e: any) => {
-    console.log('REMOVED', e, customerData);
     const updatedCustomers = { ...customerData };
     delete updatedCustomers[e];
-    console.log('updatedCustomers', updatedCustomers);
     setCustomerData(updatedCustomers);
   };
 
@@ -80,6 +78,7 @@ const CustomerContainer = () => {
         </thead>
         <tbody>
           {Object.values(customerData).map((customer, ind) => (
+
             <CustomerInputLine
               key={ind}
               customer={customer}

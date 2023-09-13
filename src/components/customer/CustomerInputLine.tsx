@@ -11,6 +11,7 @@ type Customer = {
   dob: string;
   nationality: string;
   residence_country: string;
+  [key: string]: string | number;
 };
 
 type Props = {
@@ -21,7 +22,7 @@ type Props = {
 };
 
 const CustomerInputLine = (props: Props) => {
-  const { onRemoveCustomerSlot, customer, onUpdate } = props;
+  const { onRemoveCustomerSlot, customer , onUpdate } = props;
 
   // Allow user to edit form.
   const handleChange =
@@ -38,6 +39,7 @@ const CustomerInputLine = (props: Props) => {
             key={index}
             dataName={fieldName}
             data={fieldData}
+            value={customer[fieldName]}
             onUpdate={handleChange(customer.customer_id)}
           />
         ),
@@ -47,7 +49,7 @@ const CustomerInputLine = (props: Props) => {
           variant="danger"
           onClick={() => onRemoveCustomerSlot(customer.customer_id)}
         >
-          Remove {customer.customer_id}
+          Remove
         </Button>
       </td>
     </tr>

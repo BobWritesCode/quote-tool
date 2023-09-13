@@ -3,6 +3,5 @@
   "initials": ["Initials", "text", "5"],
   "last_name": ["Last Name", "text", "50"],
   "date_of_birth": ["Date of birth", "date", ""],
-  "nationality": ["Nationality", "select", ""],
   "residence_country": ["Country of residence", "select", ""]
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 
 const CustomerInputField = (props: any) => {
-  const { data, dataName, onUpdate } = props;
+  const { data, dataName, onUpdate, value } = props;
   return (
     <td>
       {(() => {
@@ -14,6 +14,7 @@ const CustomerInputField = (props: any) => {
                 type="text"
                 maxLength={data[2]}
                 onChange={onUpdate}
+                value={value}
               />
             );
           case 'date':
@@ -26,6 +27,7 @@ const CustomerInputField = (props: any) => {
                 name={dataName}
                 aria-label="Select country of residence"
                 onChange={onUpdate}
+                value={value}
               >
                 <option value=""></option>
                 <option value="United Kingdom">United Kingdom</option>
