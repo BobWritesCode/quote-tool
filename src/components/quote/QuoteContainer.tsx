@@ -30,16 +30,16 @@ const QuoteContainer = (props: Props) => {
   const [range, setRange] = useState('');
   const [showProductRangeSelection, SetShowProductRangeSelection] =
     useState(false);
-  const currentDate = new Date(); // Create a new Date object for the current date
-  const formattedCurrentDate = currentDate.toISOString().substr(0, 10); // Format it as "YYYY-MM-DD"
   const [startDate, setStartDate] = useState('');
-
-  const currencies = ['GBP', 'EUR', 'USD'];
   const [currency, setCurrency] = useState('GBP');
-
-  const paymentFrequencies = ['Monthly', 'Quarterly', 'Annual'];
   const [paymentFrequency, setPaymentFrequency] = useState('Monthly');
   // Data ----------------------------------------------------------
+  const currencies = ['GBP', 'EUR', 'USD'];
+  const paymentFrequencies = ['Monthly', 'Quarterly', 'Annual'];
+  const products: ProductData = productsData;
+  const quoteFields: QuoteFields = quoteFieldsData;
+  const currentDate = new Date();
+  const formattedCurrentDate = currentDate.toISOString().substr(0, 10);
   // Handles --------------------------------------------------------
   /**
    *
