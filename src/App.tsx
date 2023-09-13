@@ -6,6 +6,7 @@ import { TopNavbar } from './components/top-navbar/TopNavbar';
 import CustomerContainer from './components/customer/CustomerContainer';
 import QuotesContainer from './components/quote/QuotesContainer';
 import { CustomerContextProvider } from './contexts/CustomerDataContext';
+import { QuotesContextProvider } from './contexts/QuotesContext';
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
           <Col>
             <CustomerContextProvider>
               <CustomerContainer />
-              <QuotesContainer />
+              <QuotesContextProvider>
+                <QuotesContainer />
+              </QuotesContextProvider>
             </CustomerContextProvider>
           </Col>
         </Row>
