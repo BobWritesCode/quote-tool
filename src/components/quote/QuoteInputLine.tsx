@@ -23,7 +23,7 @@ type Props = {
   onRemoveQuoteSlot: (id: number) => void;
 };
 
-const QuoteContainer = (props: Props) => {
+const QuoteInputLine = (props: Props) => {
   const { quoteData, onAddQuoteSlot, onRemoveQuoteSlot } = props;
   const wasStartDateSelected = useRef(false);
   const { customerData } = useContext(CustomerContext);
@@ -198,4 +198,4 @@ const QuoteContainer = (props: Props) => {
   );
 };
 
-export default QuoteContainer;
+export default QuoteInputLine;

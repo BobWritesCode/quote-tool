@@ -35,7 +35,6 @@ const CustomerInputField = (props: any) => {
               </Form.Select>
             );
           default:
-            console.log('default');
             return null;
         }
       })()}
