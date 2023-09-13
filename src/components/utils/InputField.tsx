@@ -15,6 +15,8 @@ const InputField = (props: any) => {
     <td>
       {(() => {
         switch (data[1]) {
+          case 'display':
+            return <>{value}</>;
           case 'text':
             return (
               <Form.Control
