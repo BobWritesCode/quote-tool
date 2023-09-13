@@ -3,5 +3,26 @@
   "initials": ["Initials", "text", "5"],
   "last_name": ["Last Name", "text", "50"],
   "date_of_birth": ["Date of birth", "date", ""],
-  "residence_country": ["Country of residence", "select", ""]
+  "residence_country": ["Country of residence", "select", [
+    "American",
+    "Canadian",
+    "British",
+    "Australian",
+    "German",
+    "French",
+    "Chinese",
+    "Japanese",
+    "Indian",
+    "Mexican",
+    "Russian",
+    "Brazilian",
+    "South African",
+    "Italian",
+    "Spanish",
+    "Swiss",
+    "Dutch",
+    "Swedish",
+    "Norwegian",
+    "Irish"
+  ]]
 }
