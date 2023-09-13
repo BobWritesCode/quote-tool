@@ -2,8 +2,12 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import QuoteContainer from './QuoteContainer';
 
 // Types ------------------------------------------------------------
+type QuoteLine = {
+  [key: string]: string | number;
+};
 type Quote = {
-  temp_quote_id: number;
+  quote_ref_id: string;
+  quoteLines: QuoteLine[];
 };
 // Main -------------------------------------------------------------
 const QuotesContainer = () => {
