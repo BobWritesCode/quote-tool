@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 // Main -------------------------------------------------------------
 const InputField = (props: any) => {
   // Props ----------------------------------------------------------
-  const { data, dataName, onUpdate, value } = props;
+  const { data, dataName, onUpdate, customer } = props;
   // Refs -----------------------------------------------------------
   // Variables ------------------------------------------------------
   // Data -----------------------------------------------------------
@@ -24,7 +24,6 @@ const InputField = (props: any) => {
                 type="text"
                 maxLength={data[2]}
                 onChange={onUpdate}
-                value={value}
               />
             );
           case 'date':
@@ -37,7 +36,6 @@ const InputField = (props: any) => {
                 name={dataName}
                 aria-label="Select country of residence"
                 onChange={onUpdate}
-                value={value}
               >
                 <option value=""></option>
                 {Object.values(data[2]).map((key: any, index: number) => (

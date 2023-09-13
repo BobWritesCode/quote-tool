@@ -191,8 +191,7 @@ const QuoteContainer = (props: Props) => {
                       key={index}
                       dataName={fieldName}
                       data={fieldData}
-                      value={customer[fieldName]}
-                      // onUpdate={handleChange(customer.customer_id)}
+                      customer={customer}
                     />
                   ),
                 )}
