@@ -1,5 +1,12 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useContext,
+} from 'react';
 import QuoteContainer from './QuoteContainer';
+import { QuotesContext } from '../../contexts/QuotesContext';
 
 // Types ------------------------------------------------------------
 type QuoteLine = {
@@ -15,6 +22,7 @@ const QuotesContainer = () => {
   // Refs -----------------------------------------------------------
   const wasCalled = useRef(false); // Checks for first render
   // Contexts -------------------------------------------------------
+  const { quotesData, setQuotesData } = useContext(QuotesContext);
   // Variables ------------------------------------------------------
   // Data -----------------------------------------------------------
   const [nextTempQuoteId, setNextTempQuoteId] = useState(10);
@@ -24,16 +32,23 @@ const QuotesContainer = () => {
    */
   const handleAddQuoteSlot = useCallback(() => {
     const newQuote: Quote = {
-      temp_quote_id: nextTempQuoteId,
+      quote_ref_id: String(nextTempQuoteId),
+      quoteLines: [],
     };
     setNextTempQuoteId(nextTempQuoteId + 1);
-    setQuotes((prevQuotes) => ({
+    setQuotesData((prevQuotes: Quote) => ({
       ...prevQuotes,
-      [nextTempQuoteId]: newQuote,
+      [String(nextTempQuoteId)]: newQuote,
     }));
+  }, [nextTempQuoteId, setQuotesData]);
   /**
    *
    */
+  const handleRemoveQuoteSlot = (target_quote_ref_id: string | number) => {
+    const updatedQuotes = { ...quotesData };
+    delete updatedQuotes[String(target_quote_ref_id)];
+    setQuotesData(updatedQuotes);
+  };
   // Effects --------------------------------------------------------
   /**
    *
@@ -48,10 +63,10 @@ const QuotesContainer = () => {
   return (
     <div>
       {/* Show quote slots */}
-      {Object.values(quotes).map((quote, i) => (
+      {Object.values(quotesData).map((quote, i) => (
         <QuoteContainer
-          key={quote.temp_quote_id}
-          quoteData={quote}
+          key={quote.quote_ref_id}
+          quote_ref_id={quote.quote_ref_id}
           onAddQuote={handleAddQuoteSlot}
           onRemoveQuote={handleRemoveQuoteSlot}
         />

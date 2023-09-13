@@ -26,6 +26,7 @@ const QuoteContainer = (props: Props) => {
   // Refs -----------------------------------------------------------
   const wasStartDateSelected = useRef(false);
   // Contexts -------------------------------------------------------
+  const { customerData, setCustomerData } = useContext(CustomerContext);
   // Variables ------------------------------------------------------
   const [range, setRange] = useState('');
   const [showProductRangeSelection, SetShowProductRangeSelection] =
