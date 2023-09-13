@@ -7,6 +7,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { CustomerContext } from '../../contexts/CustomerDataContext';
+import quoteFields from '../../data/quote_fields.json';
 import Table from 'react-bootstrap/Table';
 
 interface ProductData {
@@ -23,7 +24,7 @@ type Props = {
   onRemoveQuoteSlot: (id: number) => void;
 };
 
-const QuoteInputLine = (props: Props) => {
+const QuoteContainer = (props: Props) => {
   const { quoteData, onAddQuoteSlot, onRemoveQuoteSlot } = props;
   const wasStartDateSelected = useRef(false);
   const { customerData } = useContext(CustomerContext);
@@ -198,4 +199,4 @@ const QuoteInputLine = (props: Props) => {
   );
 };
 
-export default QuoteInputLine;
+export default QuoteContainer;

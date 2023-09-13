@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import QuoteInputLine from './QuoteInputLine';
+import QuoteContainer from './QuoteContainer';
 
 type Quote = {
   temp_quote_id: number;
@@ -45,7 +45,7 @@ const QuotesContainer = () => {
     <div>
       {/* Show quote slots */}
       {Object.values(quotes).map((quote, i) => (
-        <QuoteInputLine
+        <QuoteContainer
           key={quote.temp_quote_id}
           quoteData={quote}
           onAddQuoteSlot={handleAddQuoteSlot}
