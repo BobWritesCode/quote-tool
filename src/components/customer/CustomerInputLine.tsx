@@ -4,14 +4,14 @@ import customerFieldsData from '../../data/customer_fields.json';
 import InputField from '../utils/InputField';
 // Types ------------------------------------------------------------
 type Customer = {
-  customer_id: number;
+  customer_id: string;
   [key: string]: string | number;
 };
 type Props = {
   customer: Customer;
   customerId: number;
-  onUpdate: (targetId: number, e: React.ChangeEvent<HTMLInputElement>) => void;
-  onRemoveCustomerSlot: (customerId: number) => void;
+  onUpdate: (targetId: string, e: React.ChangeEvent<HTMLInputElement>) => void;
+  onRemoveCustomerSlot: (customerId: string) => void;
 };
 // Main -------------------------------------------------------------
 const CustomerInputLine = (props: Props) => {
@@ -23,7 +23,7 @@ const CustomerInputLine = (props: Props) => {
   // Data -----------------------------------------------------------
   // Allow user to edit form.
   const handleChange =
-    (targetId: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    (targetId: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
       onUpdate(targetId, e);
     };
   // Effects --------------------------------------------------------

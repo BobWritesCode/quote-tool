@@ -4,11 +4,12 @@ import PricingCurrent from './PricingCurrent';
 type Props = {
   product: string;
   quoteRefId: string;
+  customerRefId: string;
 };
 // Main -------------------------------------------------------------
 const Price = (props: Props) => {
   // Props ----------------------------------------------------------
-  const { product, quoteRefId } = props;
+  const { product, quoteRefId, customerRefId } = props;
   // Refs -----------------------------------------------------------
   // Contexts -------------------------------------------------------
   // Variables ------------------------------------------------------
@@ -21,7 +22,7 @@ const Price = (props: Props) => {
       {(() => {
         switch (product) {
           case 'Current':
-            return <PricingCurrent quoteRefId={quoteRefId} />;
+            return <PricingCurrent quoteRefId={quoteRefId} customerRefId={customerRefId} />;
           case 'Legacy':
             return 'Banana is good!';
           default:

@@ -5,10 +5,10 @@ type QuoteLine = {
   [key: string]: string | number;
 };
 type Quote = {
-  [key: string]: QuoteLine[];
+  [key: string]: QuoteLine;
 };
 type Quotes = {
-  [key: string]: Quote[];
+  [key: string]: Quote;
 };
 type QuotesContextType = {
   quotesData: Quotes;

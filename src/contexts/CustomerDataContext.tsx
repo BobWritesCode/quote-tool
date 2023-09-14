@@ -2,7 +2,7 @@ import { createContext, useState, ReactNode } from 'react';
 
 // types ------------------------------------------------------------
 type Customer = {
-  customer_id: number;
+  customer_id: string;
   [key: string]: string | number;
 };
 type Customers = { [key: string]: Customer };

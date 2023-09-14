@@ -1,23 +1,27 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { QuotesContext } from '../../contexts/QuotesContext';
+import { CustomerContext } from '../../contexts/CustomerDataContext';
 
 // Types ------------------------------------------------------------
 type Props = {
   quoteRefId: string;
+  customerRefId: string;
 };
 // Main -------------------------------------------------------------
 const PricingCurrent = (props: Props) => {
   // Props ----------------------------------------------------------
-  const { quoteRefId } = props;
+  const { quoteRefId, customerRefId } = props;
   // Refs -----------------------------------------------------------
   // Contexts -------------------------------------------------------
-  const { quotesData, setQuotesData } = useContext(QuotesContext);
+  const { quotesData} = useContext(QuotesContext);
+  // const { customerData } = useContext(CustomerContext);
   // Variables ------------------------------------------------------
+  // const [prodCode, setProdCode] = useState('')
   // Data -----------------------------------------------------------
   // Handles --------------------------------------------------------
   // Effects --------------------------------------------------------
   // Return ---------------------------------------------------------
-  return <div>£0</div>;
+  return <div>{}</div>;
 };
 
 export default PricingCurrent;

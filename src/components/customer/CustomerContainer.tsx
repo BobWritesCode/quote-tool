@@ -8,7 +8,7 @@ import Table from 'react-bootstrap/Table';
 import { QuotesContext } from '../../contexts/QuotesContext';
 // Types ------------------------------------------------------------
 type Customer = {
-  customer_id: number;
+  customer_id: string;
   [key: string]: string | number;
 };
 // Main -------------------------------------------------------------
@@ -28,7 +28,7 @@ const CustomerContainer = () => {
    */
   const handleAddCustomerSlot = () => {
     const newCustomer: Customer = {
-      customer_id: Number(nextCustomerId),
+      customer_id: String(nextCustomerId),
     };
     const updatedCustomers = { ...customerData };
     updatedCustomers[nextCustomerId] = newCustomer;
@@ -61,7 +61,7 @@ const CustomerContainer = () => {
    * @param e Customer data to update
    */
   const handleUpdate = (
-    targetId: number,
+    targetId: string,
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const updatedCustomers: any = { ...customerData };

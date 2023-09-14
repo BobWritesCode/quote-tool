@@ -22,7 +22,7 @@ type QuoteFields = {
 type Props = {
   quote_ref_id: string;
   onAddQuote: () => void;
-  onRemoveQuote: (customerId: number) => void;
+  onRemoveQuote: (customerId: string) => void;
 };
 type QuoteLine = {
   [key: string]: string | number;
@@ -215,7 +215,7 @@ const QuoteContainer = (props: Props) => {
                   ),
                 )}
                 <td>
-                  <Price product={'Current'} quoteRefId={quote_ref_id} />
+                  <Price product={'Current'} customerRefId={String(customer.customer_id)} quoteRefId={quote_ref_id} />
                 </td>
               </tr>
             ))}
