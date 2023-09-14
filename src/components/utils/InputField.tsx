@@ -1,51 +1,122 @@
-import React from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import Form from 'react-bootstrap/Form';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import Button from 'react-bootstrap/Button';
 // Types ------------------------------------------------------------
 // Main -------------------------------------------------------------
 const InputField = (props: any) => {
   // Props ----------------------------------------------------------
-  const { data, dataName, onUpdate, customer } = props;
+  const { displayType, displayName, customer, displayResults, onChange } =
+    props;
   // Refs -----------------------------------------------------------
   // Variables ------------------------------------------------------
+  const [chosenOption, setChosenOption] = useState(displayResults[0]);
   // Data -----------------------------------------------------------
   // Handles --------------------------------------------------------
+  /**
+   *
+   * @param e
+   */
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e.currentTarget.value);
+  };
+  /**
+   *
+   * @param e
+   */
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    onChange(e.currentTarget.value);
+  };
+  /**
+   *
+   * @param e
+   */
+  const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChosenOption(e.currentTarget.value);
+    onChange(e.currentTarget.value);
+  };
   // Effects --------------------------------------------------------
   // Return ---------------------------------------------------------
   return (
-    <td>
+    <>
       {(() => {
-        switch (data[1]) {
+        switch (displayType) {
           case 'display':
-            return data[2].map((key: string) => customer[key]).join(' ');
+            return displayResults
+              .map((value: string) => customer[value])
+              .join(' ');
           case 'text':
             return (
               <Form.Control
-                name={dataName}
+                name={displayName}
                 type="text"
-                maxLength={data[2]}
-                onChange={onUpdate}
+                maxLength={50}
+                onChange={handleChange}
               />
             );
           case 'date':
             return (
-              <Form.Control type="date" name={dataName} onChange={onUpdate} />
+              <Form.Control
+                type="date"
+                name={displayName}
+                onChange={handleChange}
+              />
             );
           case 'select':
             return (
-              <Form.Select name={dataName} onChange={onUpdate}>
+              <Form.Select name={displayName}>
                 <option value=""></option>
-                {Object.values(data[2]).map((key: any, index: number) => (
-                  <option key={index} value={key}>
-                    {key}
-                  </option>
-                ))}
+                {Object.values(displayResults).map(
+                  (value: any, idx: number) => (
+                    <option key={idx} value={value}>
+                      {value}
+                    </option>
+                  ),
+                )}
               </Form.Select>
+            );
+          case 'radio':
+            return (
+              <ButtonGroup className="me-2">
+                {displayResults.map((value: string | number, idx: number) => (
+                  <ToggleButton
+                    key={idx}
+                    id={`currency-${idx}`}
+                    type="radio"
+                    variant={'outline-secondary'}
+                    value={value}
+                    checked={chosenOption === value}
+                    onChange={(e) => {
+                      handleRadioChange(e);
+                    }}
+                  >
+                    {value}
+                  </ToggleButton>
+                ))}
+              </ButtonGroup>
+            );
+          case 'buttons':
+            return displayResults.map(
+              (value: string | number, index: number) => (
+                <Button
+                  key={index}
+                  variant="success"
+                  value={value}
+                  onClick={(
+                    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                  ) => handleClick(e)}
+                  className="me-2"
+                >
+                  {value}
+                </Button>
+              ),
             );
           default:
             return null;
         }
       })()}
-    </td>
+    </>
   );
 };
 

@@ -35,13 +35,13 @@ const QuotesContainer = () => {
    *
    */
   const handleAddQuoteSlot = useCallback(() => {
-    const newQuote: Quote = Object.keys(customerData).reduce(
-      (acc: any, customerId: any) => {
+    const newQuote: Quote = {
+      global: {}, // Add a "global" entry with an empty object
+      ...Object.keys(customerData).reduce((acc: any, customerId: any) => {
         acc[customerId] = {};
         return acc;
-      },
-      {},
-    );
+      }, {}),
+    };
     setNextTempQuoteId(nextTempQuoteId + 1);
     setQuotesData((prevQuotes: Quote) => ({
       ...prevQuotes,

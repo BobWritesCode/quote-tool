@@ -1,44 +1,85 @@
 {
   "top": {
-    "start_date": ["Start date", "date", ""],
-    "product": ["Range", "buttons", ""],
-    "currency": ["Currency", "radio", "GBP"]
+    "start_date": {
+      "displayName": "Start date",
+      "displayType": "date",
+      "displayResults": [""]
+    },
+    "range": {
+      "displayName": "Product range",
+      "displayType": "buttons",
+      "displayResults": ["Current", "Legacy"]
+    },
+    "currency": {
+      "displayName": "Currency",
+      "displayType": "radio",
+      "displayResults": ["GBP", "EUR", "USD"]
+    },
+    "paymentFrequency": {
+      "displayName": "Payment Frequency",
+      "displayType": "radio",
+      "displayResults": ["Monthly", "Quarterly", "Annual"]
+    }
   },
   "lines": {
     "Legacy": {
-      "quoteFullName": [
-        "Name",
-        "display",
-        ["first_name", "initials", "last_name"]
-      ],
-      "quoteDOB": ["Date of birth", "display", ["date_of_birth"]],
-      "quoteResidence": [
-        "Country of residence",
-        "display",
-        ["residence_country"]
-      ],
-      "quoteProduct": ["Product", "select", ["Entry", "Medium", "Advanced"]],
-      "quoteProductCode": ["Product Code", "display", [""]]
+      "quoteFullName": {
+        "displayName": "Name",
+        "displayType": "display",
+        "displayResults": ["first_name", "initials", "last_name"]
+      },
+      "quoteDOB": {
+        "displayName": "Date of birth",
+        "displayType": "display",
+        "displayResults": ["date_of_birth"]
+      },
+      "quoteResidence": {
+        "displayName": "Country of residence",
+        "displayType": "display",
+        "displayResults": ["residence_country"]
+      },
+      "quoteProduct": {
+        "displayName": "Product",
+        "displayType": "select",
+        "displayResults": ["Entry", "Medium", "Advanced"]
+      },
+      "quoteProductCode": {
+        "displayName": "Product Code",
+        "displayType": "display",
+        "displayResults": [""]
+      }
     },
     "Current": {
-      "quoteFullName": [
-        "Name",
-        "display",
-        ["first_name", "initials", "last_name"]
-      ],
-      "quoteDOB": ["Date of birth", "display", ["date_of_birth"]],
-      "quoteResidence": [
-        "Country of residence",
-        "display",
-        ["residence_country"]
-      ],
-      "quoteProduct": [
-        "Product",
-        "select",
-        ["Bronze", "Silver", "Gold", "Platinum"]
-      ],
-      "quoteProductCode": ["Product Code", "display", [""]],
-      "quoteLoading": ["Loading", "text", [""]]
+      "quoteFullName": {
+        "displayName": "Name",
+        "displayType": "display",
+        "displayResults": ["first_name", "initials", "last_name"]
+      },
+      "quoteDOB": {
+        "displayName": "Date of birth",
+        "displayType": "display",
+        "displayResults": ["date_of_birth"]
+      },
+      "quoteResidence": {
+        "displayName": "Country of residence",
+        "displayType": "display",
+        "displayResults": ["residence_country"]
+      },
+      "quoteProduct": {
+        "displayName": "Product",
+        "displayType": "select",
+        "displayResults": ["Bronze", "Silver", "Gold", "Platinum"]
+      },
+      "quoteProductCode": {
+        "displayName": "Product Code",
+        "displayType": "display",
+        "displayResults": [""]
+      },
+      "quoteLoading": {
+        "displayName": "Loading",
+        "displayType": "text",
+        "displayResults": [""]
+      }
     }
   }
 }

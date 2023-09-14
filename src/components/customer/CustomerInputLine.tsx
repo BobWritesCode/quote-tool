@@ -10,7 +10,11 @@ type Customer = {
 type Props = {
   customer: Customer;
   customerId: number;
-  onUpdate: (targetId: string, e: React.ChangeEvent<HTMLInputElement>) => void;
+  onUpdate: (
+    targetId: string,
+    updatedKey: string,
+    updatedValue: string,
+  ) => void;
   onRemoveCustomerSlot: (customerId: string) => void;
 };
 // Main -------------------------------------------------------------
@@ -21,24 +25,23 @@ const CustomerInputLine = (props: Props) => {
   // Contexts -------------------------------------------------------
   // Variables ------------------------------------------------------
   // Data -----------------------------------------------------------
-  // Allow user to edit form.
-  const handleChange =
-    (targetId: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      onUpdate(targetId, e);
-    };
   // Effects --------------------------------------------------------
   // Return ---------------------------------------------------------
   return (
     <tr>
       {Object.entries(customerFieldsData).map(
-        ([fieldName, fieldData], index) => (
-          <InputField
-            key={index}
-            dataName={fieldName}
-            data={fieldData}
-            value={customer[fieldName]}
-            onUpdate={handleChange(customer.customer_id)}
-          />
+        ([keyName, [displayName, displayType, displayResults]], index) => (
+          <td>
+            <InputField
+              key={index}
+              displayType={displayType}
+              displayName={displayName}
+              displayResults={displayResults}
+              onChange={(updatedValue: string) =>
+                onUpdate(customer.customer_id, keyName, updatedValue)
+              }
+            />
+          </td>
         ),
       )}
       <td>

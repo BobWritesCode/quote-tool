@@ -62,12 +62,11 @@ const CustomerContainer = () => {
    */
   const handleUpdate = (
     targetId: string,
-    e: React.ChangeEvent<HTMLInputElement>,
+    updatedKey: keyof Customer,
+    updatedValue: string,
   ) => {
     const updatedCustomers: any = { ...customerData };
-    const fieldName = e.target.name as keyof Customer;
-    const fieldValue = e.target.value;
-    updatedCustomers[targetId][fieldName] = fieldValue;
+    updatedCustomers[targetId][updatedKey] = updatedValue;
     setCustomerData(updatedCustomers);
   };
   // Effects --------------------------------------------------------
@@ -89,7 +88,11 @@ const CustomerContainer = () => {
               customer={customer}
               customerId={nextCustomerId}
               onRemoveCustomerSlot={handleRemoveCustomerSlot}
-              onUpdate={(targetId, e) => handleUpdate(targetId, e)}
+              onUpdate={(
+                targetId: string,
+                updatedKey: string,
+                updatedValue: string,
+              ) => handleUpdate(targetId, updatedKey, updatedValue)}
             />
           ))}
         </tbody>
