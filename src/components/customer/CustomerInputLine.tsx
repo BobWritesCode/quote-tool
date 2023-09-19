@@ -34,6 +34,7 @@ type FieldsType = {
 const CustomerInputLine = (props: Props) => {
   // Props ----------------------------------------------------------
   const { onRemoveCustomerSlot, customer, onUpdate } = props;
+  const customerFields: FieldsType = customerFieldsData;
   // Refs -----------------------------------------------------------
   // Contexts -------------------------------------------------------
   // Variables ------------------------------------------------------
