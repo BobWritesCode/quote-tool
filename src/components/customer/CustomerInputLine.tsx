@@ -5,7 +5,11 @@ import InputField from '../utils/InputField';
 // Types ------------------------------------------------------------
 type Customer = {
   customer_id: string;
-  [key: string]: string | number;
+  first_name?: string,
+  initials?: string,
+  last_name?: string,
+  date_of_birth?: string,
+  residence_country?: string,
 };
 type Props = {
   customer: Customer;
