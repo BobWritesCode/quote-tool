@@ -28,6 +28,14 @@ type Props = {
 type QuoteLine = {
   [key: string]: string | number;
 };
+type Customer = {
+  customer_id: string;
+  first_name?: string;
+  initials?: string;
+  last_name?: string;
+  date_of_birth?: string;
+  residence_country?: string;
+};
 // Main -------------------------------------------------------------
 const QuoteContainer = (props: Props) => {
   // Props -----------------------------------------------------------
