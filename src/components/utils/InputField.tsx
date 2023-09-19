@@ -4,6 +4,15 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button from 'react-bootstrap/Button';
 // Types ------------------------------------------------------------
+
+type Customer = {
+  customer_id: string;
+  first_name?: string;
+  initials?: string;
+  last_name?: string;
+  date_of_birth?: string;
+  residence_country?: string;
+};
 // Main -------------------------------------------------------------
 const InputField = (props: any) => {
   // Props ----------------------------------------------------------
