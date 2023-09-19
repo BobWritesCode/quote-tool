@@ -77,7 +77,7 @@ const CustomerContainer = () => {
         <thead>
           <tr>
             {Object.values(customerFieldsData).map((key, index) => (
-              <th key={index}>{key[0]}</th>
+              <th key={index}>{key.displayName}</th>
             ))}
           </tr>
         </thead>
