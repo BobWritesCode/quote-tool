@@ -84,7 +84,6 @@ const QuoteContainer = (props: Props) => {
     if (updatedKey === 'range') {
       setRange(String(updatedValue));
     }
-    console.log(updatedQuotes);
   };
   // Effects --------------------------------------------------------
   // Return ---------------------------------------------------------
