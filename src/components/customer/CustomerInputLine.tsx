@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import customerFieldsData from '../../data/customer_fields.json';
 import InputField from '../utils/InputField';
+import generateElementUniqueID from '../utils/generateId';
 // Types ------------------------------------------------------------
 type Customer = {
   customer_id: string;
