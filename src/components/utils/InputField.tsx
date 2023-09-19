@@ -13,6 +13,15 @@ type Customer = {
   date_of_birth?: string;
   residence_country?: string;
 };
+type Props = {
+  displayName: string;
+  displayType: string;
+  displayResults: string[];
+  elementIdToUse: string;
+  onChange: (e: string) => void;
+  customer?: Customer;
+};
+
 // Main -------------------------------------------------------------
 const InputField = (props: any) => {
   // Props ----------------------------------------------------------
