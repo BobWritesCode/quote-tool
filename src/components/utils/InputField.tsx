@@ -25,8 +25,14 @@ type Props = {
 // Main -------------------------------------------------------------
 const InputField = (props: Props) => {
   // Props ----------------------------------------------------------
-  const { displayType, displayName, customer, displayResults, onChange } =
-    props;
+  const {
+    displayType,
+    displayName,
+    customer,
+    displayResults,
+    onChange,
+    elementIdToUse,
+  } = props;
   // Refs -----------------------------------------------------------
   // Variables ------------------------------------------------------
   const [chosenOption, setChosenOption] = useState(displayResults[0]);
