@@ -23,7 +23,7 @@ type Props = {
 };
 
 // Main -------------------------------------------------------------
-const InputField = (props: any) => {
+const InputField = (props: Props) => {
   // Props ----------------------------------------------------------
   const { displayType, displayName, customer, displayResults, onChange } =
     props;
