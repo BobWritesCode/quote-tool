@@ -43,11 +43,21 @@ const CustomerInputLine = (props: Props) => {
   // Return ---------------------------------------------------------
   return (
     <tr>
-      {Object.entries(customerFieldsData).map(
-        ([keyName, [displayName, displayType, displayResults]], index) => (
-          <td>
+      {Object.keys(customerFields).map((keyName, index) => {
+        const {
+          displayName,
+          displayType,
+          displayResults,
+        }: {
+          displayName: string;
+          displayType: string;
+          displayResults: string[];
+        } = customerFields[keyName];
+
+        return (
+          <td key={index}>
             <InputField
-              key={index}
+              elementIdToUse={generateElementUniqueID()}
               displayType={displayType}
               displayName={displayName}
               displayResults={displayResults}
@@ -56,8 +66,8 @@ const CustomerInputLine = (props: Props) => {
               }
             />
           </td>
-        ),
-      )}
+        );
+      })}
       <td>
         <Button
           variant="danger"
