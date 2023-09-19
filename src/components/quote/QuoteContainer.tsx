@@ -8,6 +8,7 @@ import { CustomerContext } from '../../contexts/CustomerDataContext';
 import InputField from '../utils/InputField';
 import Price from './Price';
 import { QuotesContext } from '../../contexts/QuotesContext';
+import generateElementUniqueID from '../utils/generateId';
 // Types ------------------------------------------------------------
 type LineItem = {
   displayName: string;
@@ -101,6 +102,7 @@ const QuoteContainer = (props: Props) => {
           {Object.values(quoteFields['top']).map((key: any, index: number) => (
             <InputField
               key={index}
+              elementIdToUse={generateElementUniqueID()}
               displayType={key.displayType}
               displayName={key.displayName}
               displayResults={key.displayResults}
@@ -136,6 +138,7 @@ const QuoteContainer = (props: Props) => {
               onChange={(updatedValue: string) =>
                 handleChange('global', quote_ref_id, 'range', updatedValue)
               }
+              elementIdToUse={''}
             />
           </>
         )}
@@ -161,6 +164,7 @@ const QuoteContainer = (props: Props) => {
                   ) => (
                     <td key={index}>
                       <InputField
+                        elementIdToUse={generateElementUniqueID()}
                         displayName={displayName}
                         displayType={displayType}
                         displayResults={displayResults}
