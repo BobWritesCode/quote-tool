@@ -155,7 +155,7 @@ const QuoteContainer = (props: Props) => {
             </tr>
           </thead>
           <tbody>
-            {Object.values(customerData).map((customer, i) => (
+            {Object.values(customerData).map((customer: Customer, i) => (
               <tr key={i}>
                 {Object.values<LineItem>(quoteFields.lines[range]).map(
                   (
