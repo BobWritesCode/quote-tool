@@ -75,9 +75,12 @@ const InputField = (props: Props) => {
       {(() => {
         switch (displayType) {
           case 'display':
-            return displayResults
-              .map((value: string) => customer[value])
-              .join(' ');
+            if (customer) {
+              return (displayResults as (keyof Customer)[])
+                .map((value: keyof Customer) => customer?.[value])
+                .join(' ');
+            }
+            break;
           case 'text':
             return (
               <Form.Control
