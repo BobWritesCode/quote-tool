@@ -60,6 +60,14 @@ const InputField = (props: Props) => {
     setChosenOption(e.currentTarget.value);
     onChange(e.currentTarget.value);
   };
+  /**
+   *
+   * @param e
+   */
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setChosenOption(e.currentTarget.value);
+    onChange(e.currentTarget.value);
+  };
   // Effects --------------------------------------------------------
   // Return ---------------------------------------------------------
   return (
