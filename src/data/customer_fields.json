@@ -1,28 +1,48 @@
 {
-  "first_name": ["First Name", "text", "50"],
-  "initials": ["Initials", "text", "5"],
-  "last_name": ["Last Name", "text", "50"],
-  "date_of_birth": ["Date of birth", "date", ""],
-  "residence_country": ["Country of residence", "select", [
-    "American",
-    "Canadian",
-    "British",
-    "Australian",
-    "German",
-    "French",
-    "Chinese",
-    "Japanese",
-    "Indian",
-    "Mexican",
-    "Russian",
-    "Brazilian",
-    "South African",
-    "Italian",
-    "Spanish",
-    "Swiss",
-    "Dutch",
-    "Swedish",
-    "Norwegian",
-    "Irish"
-  ]]
+  "first_name": {
+    "displayName": "First Name",
+    "displayType": "text",
+    "displayResults": ["50"]
+  },
+  "initials": {
+    "displayName": "Initials",
+    "displayType": "text",
+    "displayResults": ["5"]
+  },
+  "last_name": {
+    "displayName": "Last Name",
+    "displayType": "text",
+    "displayResults": ["50"]
+  },
+  "date_of_birth": {
+    "displayName": "Date of birth",
+    "displayType": "date",
+    "displayResults": [""]
+  },
+  "residence_country": {
+    "displayName": "Country of residence",
+    "displayType": "select",
+    "displayResults": [
+      "American",
+      "Canadian",
+      "British",
+      "Australian",
+      "German",
+      "French",
+      "Chinese",
+      "Japanese",
+      "Indian",
+      "Mexican",
+      "Russian",
+      "Brazilian",
+      "South African",
+      "Italian",
+      "Spanish",
+      "Swiss",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Irish"
+    ]
+  }
 }
