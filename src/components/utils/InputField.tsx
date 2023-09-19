@@ -122,7 +122,7 @@ const InputField = (props: Props) => {
                 {displayResults.map((value: string | number, idx: number) => (
                   <ToggleButton
                     key={idx}
-                    id={`currency-${idx}`}
+                    id={`${elementIdToUse}${idx}`}
                     type="radio"
                     variant={'outline-secondary'}
                     value={value}
