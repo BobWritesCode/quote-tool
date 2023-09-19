@@ -100,7 +100,12 @@ const InputField = (props: Props) => {
             );
           case 'select':
             return (
-              <Form.Select name={displayName}>
+              <Form.Select
+                name={displayName}
+                onChange={(e) => {
+                  handleSelectChange(e);
+                }}
+              >
                 <option value=""></option>
                 {Object.values(displayResults).map(
                   (value: any, idx: number) => (
