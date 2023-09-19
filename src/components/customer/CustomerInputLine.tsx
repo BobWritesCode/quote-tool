@@ -21,6 +21,15 @@ type Props = {
   ) => void;
   onRemoveCustomerSlot: (customerId: string) => void;
 };
+
+type FieldsType = {
+  [key: string]: {
+    displayName: string;
+    displayType: string;
+    displayResults: string[];
+  };
+};
+
 // Main -------------------------------------------------------------
 const CustomerInputLine = (props: Props) => {
   // Props ----------------------------------------------------------
