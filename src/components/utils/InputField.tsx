@@ -76,12 +76,14 @@ const InputField = (props: Props) => {
       {(() => {
         switch (displayType) {
           case 'display':
-            let hasMatchingKey = null
-            if(customer){
+            let hasMatchingKey = null;
+            if (customer) {
               // Get customer field keys.
               const customerKeys = Object.keys(customerFieldsData);
               // Check if displayResults match customerFields data keys.
-              hasMatchingKey = Object.values(displayResults).some(value => customerKeys.includes(value));
+              hasMatchingKey = Object.values(displayResults).some((value) =>
+                customerKeys.includes(value),
+              );
             }
             // If find matching keys, then use customer dict to get strings, and add spaces between entries.
             if (hasMatchingKey) {
@@ -89,7 +91,9 @@ const InputField = (props: Props) => {
                 .map((value: keyof Customer) => customer?.[value])
                 .join(' ');
             } else {
-              return Object.values(displayResults).map((value) => value).join('%%%');
+              return Object.values(displayResults)
+                .map((value) => value)
+                .join('%%%');
             }
           case 'text':
             return (
