@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button from 'react-bootstrap/Button';
+import customerFieldsData from '../../data/customer_fields.json';
 // Types ------------------------------------------------------------
 
 type Customer = {
@@ -75,12 +76,21 @@ const InputField = (props: Props) => {
       {(() => {
         switch (displayType) {
           case 'display':
-            if (customer) {
+            let hasMatchingKey = null
+            if(customer){
+              // Get customer field keys.
+              const customerKeys = Object.keys(customerFieldsData);
+              // Check if displayResults match customerFields data keys.
+              hasMatchingKey = Object.values(displayResults).some(value => customerKeys.includes(value));
+            }
+            // If find matching keys, then use customer dict to get strings, and add spaces between entries.
+            if (hasMatchingKey) {
               return (displayResults as (keyof Customer)[])
                 .map((value: keyof Customer) => customer?.[value])
                 .join(' ');
+            } else {
+              return Object.values(displayResults).map((value) => value).join('%%%');
             }
-            break;
           case 'text':
             return (
               <Form.Control
