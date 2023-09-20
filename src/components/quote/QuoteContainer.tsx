@@ -9,12 +9,8 @@ import InputField from '../utils/InputField';
 import Price from './Price';
 import { QuotesContext } from '../../contexts/QuotesContext';
 import generateElementUniqueID from '../utils/generateId';
+import QuoteLineComp from './QuoteLineComp';
 // Types ------------------------------------------------------------
-type LineItem = {
-  displayName: string;
-  displayType: string;
-  displayResults: string[];
-};
 type ProductData = {
   [key: string]: any;
 };
@@ -72,7 +68,7 @@ const QuoteContainer = (props: Props) => {
    * Update quotes dict on change to quote.
    */
   const handleChange = (
-    customer: any,
+    customer_id: string,
     quote_ref_id: string,
     updatedKey: string,
     updatedValue: string | number,
@@ -80,7 +76,7 @@ const QuoteContainer = (props: Props) => {
     const updatedQuotes: any = { ...quotesData };
     const fieldName = updatedKey as keyof QuoteLine;
     const fieldValue = updatedValue;
-    updatedQuotes[quote_ref_id][customer][fieldName] = fieldValue;
+    updatedQuotes[quote_ref_id][customer_id][fieldName] = fieldValue;
     setQuotesData(updatedQuotes);
     if (updatedKey === 'range') {
       setRange(String(updatedValue));
@@ -117,7 +113,7 @@ const QuoteContainer = (props: Props) => {
             />
           ))}
 
-          {quotesData[quote_ref_id]['global']['range'] && (
+          {/* {quotesData[quote_ref_id]['global']['range'] && (
             <Button
               as="input"
               type="button"
@@ -125,7 +121,7 @@ const QuoteContainer = (props: Props) => {
               variant="secondary"
               className="me-2"
             />
-          )}
+          )} */}
         </div>
       )}
       {quotesData[quote_ref_id]['global']['start_date'] &&
@@ -157,38 +153,24 @@ const QuoteContainer = (props: Props) => {
           <tbody>
             {Object.values(customerData).map((customer: Customer, i) => (
               <tr key={i}>
-                {Object.values<LineItem>(quoteFields.lines[range]).map(
-                  (
-                    { displayName, displayType, displayResults }: LineItem,
-                    index: number,
-                  ) => (
-                    <td key={index}>
-                      <InputField
-                        elementIdToUse={generateElementUniqueID()}
-                        displayName={displayName}
-                        displayType={displayType}
-                        displayResults={displayResults}
-                        customer={customer}
-                        onChange={(updatedValue: string) =>
-                          handleChange(
-                            customer.customer_id,
-                            quote_ref_id,
-                            `${Object.keys(quoteFields.lines[range])}`,
-                            updatedValue,
-                          )
-                        }
-                      />
-                    </td>
-                  ),
-                )}
-
-                <td>
-                  <Price
-                    product={'Current'}
-                    customerRefId={String(customer.customer_id)}
-                    quoteRefId={quote_ref_id}
-                  />
-                </td>
+                <QuoteLineComp
+                  customer={customer}
+                  range={range}
+                  quote_ref_id={quote_ref_id}
+                  onChange={(
+                    customer_id,
+                    quote_ref_id,
+                    updatedKey,
+                    updatedValue,
+                  ) =>
+                    handleChange(
+                      customer_id,
+                      quote_ref_id,
+                      updatedKey,
+                      updatedValue,
+                    )
+                  }
+                />
               </tr>
             ))}
           </tbody>
