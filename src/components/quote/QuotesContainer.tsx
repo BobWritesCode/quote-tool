@@ -16,9 +16,6 @@ type QuoteLine = {
 type Quote = {
   [key: string]: QuoteLine;
 };
-type Quotes = {
-  [key: string]: Quote;
-};
 // Main -------------------------------------------------------------
 const QuotesContainer = () => {
   // Props ----------------------------------------------------------

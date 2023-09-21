@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import appStyles from '../../styles/App.module.css';
 import Button from 'react-bootstrap/Button';
 import productsData from '../../data/products.json';
@@ -6,7 +6,6 @@ import quoteFieldsData from '../../data/quote_fields.json';
 import Table from 'react-bootstrap/Table';
 import { CustomerContext } from '../../contexts/CustomerDataContext';
 import InputField from '../utils/InputField';
-import Price from './Price';
 import { QuotesContext } from '../../contexts/QuotesContext';
 import generateElementUniqueID from '../utils/generateId';
 import QuoteLineComp from './QuoteLineComp';
@@ -44,7 +43,7 @@ const QuoteContainer = (props: Props) => {
   // Variables ------------------------------------------------------
   const [showProductRangeSelection, SetShowProductRangeSelection] =
     useState(false);
-  const [range, setRange] = useState('Legacy');
+  const [range, setRange] = useState('');
   // Data ----------------------------------------------------------
   const products: ProductData = productsData;
   const quoteFields: QuoteFields = quoteFieldsData;
@@ -142,7 +141,12 @@ const QuoteContainer = (props: Props) => {
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
-              {Object.values(quoteFields['lines'][range]).map(
+              {Object.values(quoteFields[range]['Customer']).map(
+                (key: any, index: number) => (
+                  <th key={index}>{key.displayName}</th>
+                ),
+              )}
+              {Object.values(quoteFields[range]['ProductOptions']).map(
                 (key: any, index: number) => (
                   <th key={index}>{key.displayName}</th>
                 ),
@@ -157,6 +161,7 @@ const QuoteContainer = (props: Props) => {
                   customer={customer}
                   range={range}
                   quote_ref_id={quote_ref_id}
+                  currency={quotesData[quote_ref_id]['global'].currency}
                   onChange={(
                     customer_id,
                     quote_ref_id,
