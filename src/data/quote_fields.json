@@ -5,11 +5,6 @@
       "displayType": "date",
       "displayResults": [""]
     },
-    "range": {
-      "displayName": "Product range",
-      "displayType": "buttons",
-      "displayResults": ["Current", "Legacy"]
-    },
     "currency": {
       "displayName": "Currency",
       "displayType": "radio",
@@ -19,10 +14,16 @@
       "displayName": "Payment Frequency",
       "displayType": "radio",
       "displayResults": ["Monthly", "Quarterly", "Annual"]
+    },
+    "discount": {
+      "displayName": "Discount",
+      "displayType": "text",
+      "displayResults": []
     }
   },
-  "lines": {
-    "Legacy": {
+
+  "GHP": {
+    "Customer": {
       "quoteFullName": {
         "displayName": "Name",
         "displayType": "display",
@@ -41,44 +42,124 @@
       "quoteProduct": {
         "displayName": "Product",
         "displayType": "select",
-        "displayResults": ["Entry", "Medium", "Advanced"]
-      },
-      "quoteProductCode": {
-        "displayName": "Product Code",
-        "displayType": "display",
-        "displayResults": [""]
+        "displayResults": ["Major", "Bronze", "Silver", "Gold", "Platinum"]
       }
     },
-    "Current": {
-      "quoteFullName": {
-        "displayName": "Name",
-        "displayType": "display",
-        "displayResults": ["first_name", "initials", "last_name"]
+    "ProductOptions": {
+      "quoteIPDeductible": {
+        "displayName": "Inpatient Deductible",
+        "Major": {
+          "displayType": "select",
+          "displayResults": ["£0", "£1000", "£2000", "£5000"]
+        },
+        "Bronze": {
+          "displayType": "select",
+          "displayResults": ["£0", "£1000", "£2000", "£5000", "£7500"]
+        },
+        "Silver": {
+          "displayType": "select",
+          "displayResults": ["£0", "£1000", "£2000", "£5000", "£7500"]
+        },
+        "Gold": {
+          "displayType": "select",
+          "displayResults": ["£0", "£1000", "£2000", "£5000", "£7500"]
+        },
+        "Platinum": {
+          "displayType": "select",
+          "displayResults": ["£0", "£1000", "£2000", "£5000", "£7500"]
+        }
       },
-      "quoteDOB": {
-        "displayName": "Date of birth",
-        "displayType": "display",
-        "displayResults": ["date_of_birth"]
+      "quoteOPDeductible": {
+        "displayName": "Outpatient Deductible",
+        "Major": {
+          "displayType": "display",
+          "displayResults": ["N/A"]
+        },
+        "Bronze": {
+          "displayType": "select",
+          "displayResults": ["£0", "£100", "£200", "£500"]
+        },
+        "Silver": {
+          "displayType": "select",
+          "displayResults": ["£0", "£100", "£200", "£500"]
+        },
+        "Gold": {
+          "displayType": "select",
+          "displayResults": ["£0", "£100", "£200", "£500"]
+        },
+        "Platinum": {
+          "displayType": "select",
+          "displayResults": ["£0", "£100", "£200", "£500"]
+        }
       },
-      "quoteResidence": {
-        "displayName": "Country of residence",
-        "displayType": "display",
-        "displayResults": ["residence_country"]
+      "quoteRegion": {
+        "displayName": "Region",
+        "Major": {
+          "displayType": "display",
+          "displayResults": ["Worldwide"]
+        },
+        "Bronze": {
+          "displayType": "select",
+          "displayResults": ["Europe", "Worldwide"]
+        },
+        "Silver": {
+          "displayType": "select",
+          "displayResults": ["Europe", "Worldwide"]
+        },
+        "Gold": {
+          "displayType": "select",
+          "displayResults": ["Europe", "Worldwide"]
+        },
+        "Platinum": {
+          "displayType": "display",
+          "displayResults": ["Worldwide"]
+        }
       },
-      "quoteProduct": {
-        "displayName": "Product",
-        "displayType": "select",
-        "displayResults": ["Bronze", "Silver", "Gold", "Platinum"]
-      },
-      "quoteProductCode": {
-        "displayName": "Product Code",
-        "displayType": "display",
-        "displayResults": [""]
+      "quoteUSA": {
+        "displayName": "USA",
+        "Major": {
+          "displayType": "select",
+          "displayResults": ["Included", "Excluded"]
+        },
+        "Bronze": {
+          "displayType": "select",
+          "displayResults": ["Included", "Excluded"]
+        },
+        "Silver": {
+          "displayType": "select",
+          "displayResults": ["Included", "Excluded"]
+        },
+        "Gold": {
+          "displayType": "select",
+          "displayResults": ["Included", "Excluded"]
+        },
+        "Platinum": {
+          "displayType": "display",
+          "displayResults": ["Worldwide"]
+        }
       },
       "quoteLoading": {
         "displayName": "Loading",
-        "displayType": "text",
-        "displayResults": [""]
+        "Major": {
+          "displayType": "text",
+          "displayResults": [""]
+        },
+        "Bronze": {
+          "displayType": "text",
+          "displayResults": [""]
+        },
+        "Silver": {
+          "displayType": "text",
+          "displayResults": [""]
+        },
+        "Gold": {
+          "displayType": "text",
+          "displayResults": [""]
+        },
+        "Platinum": {
+          "displayType": "text",
+          "displayResults": [""]
+        }
       }
     }
   }
