@@ -21,8 +21,102 @@
       "displayResults": []
     }
   },
-
-  "GHP": {
+  "GHP v1": {
+    "Customer": {
+      "quoteFullName": {
+        "displayName": "Name",
+        "displayType": "display",
+        "displayResults": ["first_name", "initials", "last_name"]
+      },
+      "quoteDOB": {
+        "displayName": "Date of birth",
+        "displayType": "display",
+        "displayResults": ["date_of_birth"]
+      },
+      "quoteResidence": {
+        "displayName": "Country of residence",
+        "displayType": "display",
+        "displayResults": ["residence_country"]
+      },
+      "quoteProduct": {
+        "displayName": "Product",
+        "displayType": "select",
+        "displayResults": ["Major", "Bronze", "Silver", "Gold", "Platinum"]
+      }
+    },
+    "ProductOptions": {
+      "quoteIPDeductible": {
+        "displayName": "Deductible",
+        "Major": {
+          "displayType": "select",
+          "displayResults": ["£0", "£1000", "£2000", "£5000"]
+        },
+        "Bronze": {
+          "displayType": "display",
+          "displayResults": ["N/A"]
+        },
+        "Silver": {
+          "displayType": "display",
+          "displayResults": ["N/A"]
+        },
+        "Gold": {
+          "displayType": "display",
+          "displayResults": ["N/A"]
+        },
+        "Platinum": {
+          "displayType": "display",
+          "displayResults": ["N/A"]
+        }
+      },
+      "quoteOPDeductible": {
+        "displayName": "Co-insurance",
+        "Major": {
+          "displayType": "display",
+          "displayResults": ["N/A"]
+        },
+        "Bronze": {
+          "displayType": "select",
+          "displayResults": ["15%", "25%"]
+        },
+        "Silver": {
+          "displayType": "select",
+          "displayResults": ["0%", "15%", "25%"]
+        },
+        "Gold": {
+          "displayType": "select",
+          "displayResults": ["0%", "15%", "25%"]
+        },
+        "Platinum": {
+          "displayType": "display",
+          "displayResults": ["0%"]
+        }
+      },
+      "quoteLoading": {
+        "displayName": "Loading",
+        "Major": {
+          "displayType": "text",
+          "displayResults": [""]
+        },
+        "Bronze": {
+          "displayType": "text",
+          "displayResults": [""]
+        },
+        "Silver": {
+          "displayType": "text",
+          "displayResults": [""]
+        },
+        "Gold": {
+          "displayType": "text",
+          "displayResults": [""]
+        },
+        "Platinum": {
+          "displayType": "text",
+          "displayResults": [""]
+        }
+      }
+    }
+  },
+  "GHP v2": {
     "Customer": {
       "quoteFullName": {
         "displayName": "Name",
@@ -159,6 +253,153 @@
         "Platinum": {
           "displayType": "text",
           "displayResults": [""]
+        }
+      }
+    }
+  },
+  "WHO": {
+    "Customer": {
+      "quoteFullName": {
+        "displayName": "Name",
+        "displayType": "display",
+        "displayResults": ["first_name", "initials", "last_name"]
+      },
+      "quoteDOB": {
+        "displayName": "Date of birth",
+        "displayType": "display",
+        "displayResults": ["date_of_birth"]
+      },
+      "quoteResidence": {
+        "displayName": "Country of residence",
+        "displayType": "display",
+        "displayResults": ["residence_country"]
+      },
+      "quoteProduct": {
+        "displayName": "Product",
+        "displayType": "select",
+        "displayResults": ["", "WHO"]
+      }
+    },
+    "ProductOptions": {
+      "quoteIPDeductible": {
+        "displayName": "Core",
+        "WHO": {
+          "displayType": "radio",
+          "displayResults": ["Yes"]
+        }
+      },
+      "quoteOPDeductible": {
+        "displayName": "OP",
+        "WHO": {
+          "displayType": "radio",
+          "displayResults": ["No", "Yes"]
+        }
+      },
+      "quoteRegion": {
+        "displayName": "Meds",
+        "WHO": {
+          "displayType": "radio",
+          "displayResults": ["No", "Yes"]
+        }
+      },
+      "quoteUSA": {
+        "displayName": "WB",
+        "WHO": {
+          "displayType": "radio",
+          "displayResults": ["No", "Yes"]
+        }
+      },
+      "Evac/Repat": {
+        "displayName": "WB",
+        "WHO": {
+          "displayType": "radio",
+          "displayResults": ["No", "Evac", "Evac/Repat"]
+        }
+      },
+      "quoteLoading": {
+        "displayName": "Loading",
+        "WHO": {
+          "displayType": "text",
+          "displayResults": [""]
+        }
+      }
+    }
+  },
+  "LL": {
+    "Customer": {
+      "quoteFullName": {
+        "displayName": "Name",
+        "displayType": "display",
+        "displayResults": ["first_name", "initials", "last_name"]
+      },
+      "quoteDOB": {
+        "displayName": "Date of birth",
+        "displayType": "display",
+        "displayResults": ["date_of_birth"]
+      },
+      "quoteResidence": {
+        "displayName": "Country of residence",
+        "displayType": "display",
+        "displayResults": ["residence_country"]
+      },
+      "quoteProduct": {
+        "displayName": "Product",
+        "displayType": "select",
+        "displayResults": ["Easy", "Medium", "Hard"]
+      }
+    },
+    "ProductOptions": {
+      "quoteIPDeductible": {
+        "displayName": "Deductible",
+        "Easy": {
+          "displayType": "select",
+          "displayResults": ["£0", "£1000", "£2000", "£5000"]
+        },
+        "Medium": {
+          "displayType": "select",
+          "displayResults": ["£0", "£1000", "£2000", "£5000"]
+        },
+        "Hard": {
+          "displayType": "select",
+          "displayResults": ["£0", "£1000", "£2000", "£5000"]
+        }
+      },
+      "quoteAssistance": {
+        "displayName": "Evac/Repat",
+        "Easy": {
+          "displayType": "radio",
+          "displayResults": ["No", "Evac", "Evac/Repat"]
+        },
+        "Medium": {
+          "displayType": "radio",
+          "displayResults": ["No", "Evac", "Evac/Repat"]
+        },
+        "Hard": {
+          "displayType": "radio",
+          "displayResults": ["No", "Evac", "Evac/Repat"]
+        }
+      },
+      "quoteUSA": {
+        "displayName": "USA",
+        "Easy": {
+          "displayType": "select",
+          "displayResults": ["Included", "Excluded"]
+        },
+        "Medium": {
+          "displayType": "select",
+          "displayResults": ["Included", "Excluded"]
+        },
+        "Silver": {
+          "displayType": "select",
+          "displayResults": ["Included", "Excluded"]
+        },
+        "Hard": {
+          "displayType": "select",
+          "displayResults": ["Included", "Excluded"]
+        },
+        "Platinum": {
+          "displayType": "display",
+          "displayResults": ["Worldwide"]
         }
       }
     }
