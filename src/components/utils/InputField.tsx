@@ -21,9 +21,15 @@ type Props = {
   elementIdToUse: string;
   onChange: (e: string) => void;
   customer?: Customer;
+  productCode?: String;
 };
 
 // Main -------------------------------------------------------------
+/**
+ *
+ * @param props
+ * @returns
+ */
 const InputField = (props: Props) => {
   // Props ----------------------------------------------------------
   const {
@@ -33,6 +39,7 @@ const InputField = (props: Props) => {
     displayResults,
     onChange,
     elementIdToUse,
+    // productCode,
   } = props;
   // Refs -----------------------------------------------------------
   // Variables ------------------------------------------------------
@@ -120,7 +127,6 @@ const InputField = (props: Props) => {
                   handleSelectChange(e);
                 }}
               >
-                <option value=""></option>
                 {Object.values(displayResults).map(
                   (value: any, idx: number) => (
                     <option key={idx} value={value}>
