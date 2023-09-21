@@ -1,13 +1,4 @@
 {
-  "Current": [
-    "Bronze",
-    "Silver",
-    "Gold",
-    "Platinum"
-  ],
-  "Legacy": [
-    "Entry",
-    "Medium",
-    "Advanced"
+  "GHP": [
   ]
 }
