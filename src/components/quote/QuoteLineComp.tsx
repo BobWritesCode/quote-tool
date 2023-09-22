@@ -94,55 +94,54 @@ const QuoteLineComp = (props: Props) => {
     return displayResults;
   };
   // Effects --------------------------------------------------------
+  // JSX build section ----------------------------------------------
+  const showCustomerFields = () => {
+    return Object.values<CustomerOptions>(quoteFields[range]['Customer']).map(
+      ({ displayName, displayType, displayResults }, index: number) => (
+        <td key={index}>
+          <InputField
+            elementIdToUse={generateElementUniqueID()}
+            displayName={displayName}
+            displayType={displayType}
+            displayResults={displayResults}
+            customer={customer}
+            onChange={(updatedValue: string) =>
+              handleChange(
+                updatedValue,
+                `${Object.keys(quoteFields[range]['Customer'])[index]}`,
+              )
+            }
+          />
+        </td>
+      ),
+    );
+  };
 
-  // Return ---------------------------------------------------------
-  return (
-    <>
-      {Object.values<CustomerOptions>(quoteFields[range]['Customer']).map(
-        ({ displayName, displayType, displayResults }, index: number) => (
-          <td key={index}>
-            <InputField
-              elementIdToUse={generateElementUniqueID()}
-              displayName={displayName}
-              displayType={displayType}
-              displayResults={displayResults}
-              customer={customer}
-              onChange={(updatedValue: string) =>
-                handleChange(
-                  updatedValue,
-                  `${Object.keys(quoteFields[range]['Customer'])[index]}`,
-                )
-              }
-            />
-          </td>
-        ),
-      )}
-      {product &&
-        Object.values<ProductOptions>(quoteFields[range]['ProductOptions']).map(
-          (key, index) => (
-            <td key={index}>
-              <InputField
-                elementIdToUse={generateElementUniqueID()}
-                displayName={key.displayName}
-                displayType={key[product]['displayType']}
-                displayResults={handleDisplayResults(
-                  key[product]['displayResults'],
-                )}
-                // displayResults={key[product]['displayResults']}
-                // productCode={prodCode}
-                customer={customer}
-                onChange={(updatedValue: string) =>
-                  handleChange(
-                    updatedValue,
-                    `${
-                      Object.keys(quoteFields[range]['ProductOptions'])[index]
-                    }`,
-                  )
-                }
-              />
-            </td>
-          ),
-        )}
+  const showProductFields = () => {
+    return Object.values<ProductOptions>(
+      quoteFields[range]['ProductOptions'],
+    ).map((key, index) => (
+      <td key={index}>
+        <InputField
+          elementIdToUse={generateElementUniqueID()}
+          displayName={key.displayName}
+          displayType={key[product]['displayType']}
+          displayResults={handleDisplayResults(key[product]['displayResults'])}
+          // productCode={prodCode}
+          customer={customer}
+          onChange={(updatedValue: string) =>
+            handleChange(
+              updatedValue,
+              `${Object.keys(quoteFields[range]['ProductOptions'])[index]}`,
+            )
+          }
+        />
+      </td>
+    ));
+  };
+
+  const showPriceField = () => {
+    return (
       <td>
         <Price
           product={'Current'}
@@ -150,6 +149,15 @@ const QuoteLineComp = (props: Props) => {
           quoteRefId={quote_ref_id}
         />
       </td>
+    );
+  };
+
+  // Return ---------------------------------------------------------
+  return (
+    <>
+      {showCustomerFields()}
+      {product && showProductFields()}
+      {showPriceField()}
     </>
   );
 };
