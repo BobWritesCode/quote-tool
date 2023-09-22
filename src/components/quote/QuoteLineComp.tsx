@@ -48,9 +48,6 @@ const QuoteLineComp = (props: Props) => {
   // Refs -----------------------------------------------------------
   // Contexts -------------------------------------------------------
   const [product, setProduct] = useState('');
-  const [prodCode, setProdCode] = useState(
-    funcGetProductCode(range, product, currency),
-  );
   // Variables ------------------------------------------------------
   // Data -----------------------------------------------------------
   const quoteFields: QuoteFields = quoteFieldsData;
@@ -73,12 +70,6 @@ const QuoteLineComp = (props: Props) => {
     );
   };
   // Effects --------------------------------------------------------
-  /**
-   *
-   */
-  useEffect(() => {
-    setProdCode(funcGetProductCode(range, product, currency));
-  }, [range, product, currency]);
 
   // Return ---------------------------------------------------------
   return (
@@ -91,7 +82,6 @@ const QuoteLineComp = (props: Props) => {
               displayName={displayName}
               displayType={displayType}
               displayResults={displayResults}
-              productCode={prodCode}
               customer={customer}
               onChange={(updatedValue: string) =>
                 handleChange(
@@ -114,7 +104,7 @@ const QuoteLineComp = (props: Props) => {
                   displayName={key.displayName}
                   displayType={key[product]['displayType']}
                   displayResults={key[product]['displayResults']}
-                  productCode={prodCode}
+                  // productCode={prodCode}
                   customer={customer}
                   onChange={(updatedValue: string) =>
                     handleChange(
