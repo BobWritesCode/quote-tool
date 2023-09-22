@@ -111,16 +111,6 @@ const QuoteContainer = (props: Props) => {
               }
             />
           ))}
-
-          {/* {quotesData[quote_ref_id]['global']['range'] && (
-            <Button
-              as="input"
-              type="button"
-              value={quotesData[quote_ref_id]['global']['range']}
-              variant="secondary"
-              className="me-2"
-            />
-          )} */}
         </div>
       )}
       {quotesData[quote_ref_id]['global']['start_date'] &&
