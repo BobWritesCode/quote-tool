@@ -3,7 +3,6 @@ import quoteFieldsData from '../../data/quote_fields.json';
 import InputField from '../utils/InputField';
 import Price from './Price';
 import generateElementUniqueID from '../utils/generateId';
-import funcGetProductCode from '../../functions/funcGetProductCode';
 // Types ------------------------------------------------------------
 type CustomerOptions = {
   displayName: string;
@@ -96,7 +95,6 @@ const QuoteLineComp = (props: Props) => {
       {product &&
         Object.values<ProductOptions>(quoteFields[range]['ProductOptions']).map(
           (key, index) => (
-            console.log(key, key.displayName, key[product]),
             (
               <td key={index}>
                 <InputField
