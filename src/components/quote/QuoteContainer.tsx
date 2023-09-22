@@ -9,6 +9,7 @@ import InputField from '../utils/InputField';
 import { QuotesContext } from '../../contexts/QuotesContext';
 import generateElementUniqueID from '../utils/generateId';
 import QuoteLineComp from './QuoteLineComp';
+import funcGetProductCode from '../../functions/funcGetProductCode';
 // Types ------------------------------------------------------------
 type ProductData = {
   [key: string]: any;
@@ -75,6 +76,7 @@ const QuoteContainer = (props: Props) => {
     const updatedQuotes: any = { ...quotesData };
     const fieldName = updatedKey as keyof QuoteLine;
     const fieldValue = updatedValue;
+    updatedQuotes[quote_ref_id][customer_id]["ProductCode"] = funcGetProductCode(customerData[customer_id], updatedQuotes[quote_ref_id][customer_id]);
     updatedQuotes[quote_ref_id][customer_id][fieldName] = fieldValue;
     setQuotesData(updatedQuotes);
     if (updatedKey === 'range') {
