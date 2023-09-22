@@ -13,11 +13,6 @@ type CustomerOptions = {
 type ProductOptions = {
   displayName: string;
 } & Record<string, any>;
-//   [key: string]: {
-//     displayType: string;
-//     displayResults: string[];
-//   };
-// };
 type QuoteFields = {
   [key: string]: any;
 };
