@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import quoteFieldsData from '../../data/quote_fields.json';
 import InputField from '../utils/InputField';
 import Price from './Price';
 import generateElementUniqueID from '../utils/generateId';
 import { QuotesContext } from '../../contexts/QuotesContext';
+import funcSetDefaultQuoteValues from '../../functions/funcSetDefaultQuoteValues';
 import funcResultsToDisplay from '../../functions/funcResultsToDisplay';
 // Types ------------------------------------------------------------
 type CustomerOptions = {
@@ -44,7 +45,7 @@ const QuoteLineComp = (props: Props) => {
   // Refs -----------------------------------------------------------
   // Contexts -------------------------------------------------------
   const [product, setProduct] = useState('');
-  const { quotesData } = useContext(QuotesContext);
+  const { quotesData, setQuotesData } = useContext(QuotesContext);
   // Variables ------------------------------------------------------
   // Data -----------------------------------------------------------
   const quoteFields: QuoteFields = quoteFieldsData;
@@ -55,6 +56,7 @@ const QuoteLineComp = (props: Props) => {
    * @param updatedKey
    */
   const handleChange = (updatedValue: string, updatedKey: string) => {
+    const cust_id = customer.customer_id;
     if (updatedKey === 'quoteProduct') {
       setProduct(updatedValue);
       const updatedQuotes = funcSetDefaultQuoteValues(
