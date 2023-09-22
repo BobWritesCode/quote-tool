@@ -10,6 +10,7 @@ import { QuotesContext } from '../../contexts/QuotesContext';
 import generateElementUniqueID from '../utils/generateId';
 import QuoteLineComp from './QuoteLineComp';
 import funcGetProductCode from '../../functions/funcGetProductCode';
+import funcSetDefaultQuoteValues from '../../functions/funcSetDefaultQuoteValues';
 // Types ------------------------------------------------------------
 type ProductData = {
   [key: string]: any;
@@ -76,45 +77,75 @@ const QuoteContainer = (props: Props) => {
     const updatedQuotes: any = { ...quotesData };
     const fieldName = updatedKey as keyof QuoteLine;
     const fieldValue = updatedValue;
-    updatedQuotes[quote_ref_id][customer_id]["ProductCode"] = funcGetProductCode(customerData[customer_id], updatedQuotes[quote_ref_id][customer_id]);
+    updatedQuotes[quote_ref_id][customer_id]['ProductCode'] =
+      funcGetProductCode(
+        customerData[customer_id],
+        updatedQuotes[quote_ref_id][customer_id],
+        updatedQuotes[quote_ref_id]['global'],
+      );
     updatedQuotes[quote_ref_id][customer_id][fieldName] = fieldValue;
     setQuotesData(updatedQuotes);
     if (updatedKey === 'range') {
       setRange(String(updatedValue));
     }
   };
+
   // Effects --------------------------------------------------------
+  // JSX build section ----------------------------------------------
+  const showAddQuoteButton = () => {
+    return (
+      <Button variant="success" onClick={handleAddQuote}>
+        Add quote...
+      </Button>
+    );
+  };
+  const showDeleteQuoteButton = () => {
+    return (
+      <Button variant="danger" value={quote_ref_id} onClick={handleRemoveQuote}>
+        Delete quote...
+      </Button>
+    );
+  };
+  const showGlobalQuoteOptions = () => {
+    if (Object.keys(quotesData[quote_ref_id]['global']).length === 0) {
+      const updatedQuotes = funcSetDefaultQuoteValues(
+        quotesData,
+        quote_ref_id,
+        'global',
+        quoteFields['top'],
+        range,
+      );
+      setQuotesData(updatedQuotes);
+    }
+    return (
+      <div className="d-flex mb-2">
+        {Object.values(quoteFields['top']).map((key: any, index: number) => (
+          <InputField
+            key={index}
+            elementIdToUse={generateElementUniqueID()}
+            displayType={key.displayType}
+            displayName={key.displayName}
+            displayResults={key.displayResults}
+            onChange={(updatedValue: string) =>
+              handleChange(
+                'global',
+                quote_ref_id,
+                `${Object.keys(quoteFields['top'])[index]}`,
+                updatedValue,
+              )
+            }
+          />
+        ))}
+      </div>
+    );
+  };
   // Return ---------------------------------------------------------
   return (
     <div className={`${appStyles.Box} mb-2 p-3`}>
-      Quote ref: {quote_ref_id}
+      {/* Quote ref: {quote_ref_id} */}
       <br />
-      {!showProductRangeSelection && (
-        <Button variant="success" onClick={handleAddQuote}>
-          Add quote...
-        </Button>
-      )}
-      {showProductRangeSelection && (
-        <div className="d-flex mb-2">
-          {Object.values(quoteFields['top']).map((key: any, index: number) => (
-            <InputField
-              key={index}
-              elementIdToUse={generateElementUniqueID()}
-              displayType={key.displayType}
-              displayName={key.displayName}
-              displayResults={key.displayResults}
-              onChange={(updatedValue: string) =>
-                handleChange(
-                  'global',
-                  quote_ref_id,
-                  `${Object.keys(quoteFields['top'])[index]}`,
-                  updatedValue,
-                )
-              }
-            />
-          ))}
-        </div>
-      )}
+      {!showProductRangeSelection && showAddQuoteButton()}
+      {showProductRangeSelection && showGlobalQuoteOptions()}
       {quotesData[quote_ref_id]['global']['start_date'] &&
         !quotesData[quote_ref_id]['global']?.['range'] && (
           <>
@@ -173,15 +204,7 @@ const QuoteContainer = (props: Props) => {
           </tbody>
         </Table>
       )}
-      {showProductRangeSelection && (
-        <Button
-          variant="danger"
-          value={quote_ref_id}
-          onClick={handleRemoveQuote}
-        >
-          Delete quote...
-        </Button>
-      )}
+      {showProductRangeSelection && showDeleteQuoteButton()}
     </div>
   );
 };
