@@ -4,6 +4,7 @@ import InputField from '../utils/InputField';
 import Price from './Price';
 import generateElementUniqueID from '../utils/generateId';
 import { QuotesContext } from '../../contexts/QuotesContext';
+import funcResultsToDisplay from '../../functions/funcResultsToDisplay';
 // Types ------------------------------------------------------------
 type CustomerOptions = {
   displayName: string;
@@ -56,37 +57,27 @@ const QuoteLineComp = (props: Props) => {
   const handleChange = (updatedValue: string, updatedKey: string) => {
     if (updatedKey === 'quoteProduct') {
       setProduct(updatedValue);
+      const updatedQuotes = funcSetDefaultQuoteValues(
+        quotesData,
+        quote_ref_id,
+        cust_id,
+        quoteFields[range]['ProductOptions'],
+        range,
+        updatedValue,
+      );
+      setQuotesData(updatedQuotes)
+    } else {
+      onChange(
+        // Customer id to update.
+        cust_id,
+        // Quote Id to update.
+        quote_ref_id,
+        // Key to update.
+        updatedKey,
+        // Update value to...
+        updatedValue,
+      );
     }
-    onChange(
-      // Customer id to update.
-      customer.customer_id,
-      // Quote Id to update.
-      quote_ref_id,
-      // Key to update.
-      updatedKey,
-      // Update value to...
-      updatedValue,
-    );
-  };
-  /**
-   * Checks to see if there is result variable is set to choose the
-   * correct variable. For example if displayResultVariable is set
-   * to "currency", and the currency selected is "EUR", then
-   * the "EUR" array from displayResults is returned.
-   * @param displayResults A table of results.
-   * @returns The correct array of results if there is a
-   * displayResultVariable set in the table.
-   */
-  const handleDisplayResults = (displayResults: any) => {
-    if (displayResults.displayResultVariable) {
-      displayResults =
-        displayResults[
-          quotesData[quote_ref_id]['global'][
-            `${displayResults.displayResultVariable}`
-          ]
-        ];
-    }
-    return displayResults;
   };
   // Effects --------------------------------------------------------
   // JSX build section ----------------------------------------------
@@ -121,7 +112,7 @@ const QuoteLineComp = (props: Props) => {
           elementIdToUse={generateElementUniqueID()}
           displayName={key.displayName}
           displayType={key[product]['displayType']}
-          displayResults={handleDisplayResults(key[product]['displayResults'])}
+          displayResults={funcResultsToDisplay(quotesData, quote_ref_id, key[product]['displayResults'])}
           // productCode={prodCode}
           customer={customer}
           onChange={(updatedValue: string) =>
