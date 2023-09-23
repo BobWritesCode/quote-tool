@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect, useRef, useCallback } from 'react';
 import quoteFieldsData from '../../data/quote_fields.json';
 import InputField from '../utils/InputField';
 import Price from './Price';
@@ -6,6 +6,7 @@ import generateElementUniqueID from '../utils/generateId';
 import { QuotesContext } from '../../contexts/QuotesContext';
 import funcSetDefaultQuoteValues from '../../functions/funcSetDefaultQuoteValues';
 import funcResultsToDisplay from '../../functions/funcResultsToDisplay';
+import funcGetProductCode from '../../functions/funcGetProductCode';
 // Types ------------------------------------------------------------
 type CustomerOptions = {
   displayName: string;
@@ -25,6 +26,9 @@ type Customer = {
   last_name?: string;
   date_of_birth?: number;
   residence_country?: string;
+};
+type QuoteLine = {
+  [key: string]: string | number;
 };
 type Props = {
   customer: Customer;
@@ -61,35 +65,48 @@ const QuoteLineComp = (props: Props) => {
     if (updatedKey === 'quoteProduct') {
       setProduct(updatedValue);
       const updatedQuotes = funcSetDefaultQuoteValues(
-        quotesData,
+        { ...quotesData },
         quote_ref_id,
         cust_id,
         quoteFields[range]['ProductOptions'],
         range,
         updatedValue,
       );
+      // Set product code for customer for quote
+      updatedQuotes[quote_ref_id][cust_id]['quoteProductCode'] =
+        funcGetProductCode(customer, updatedQuotes[cust_id], range);
       setQuotesData(updatedQuotes);
     } else {
-      onChange(
-        // Customer id to update.
-        cust_id,
-        // Quote Id to update.
-        quote_ref_id,
-        // Key to update.
-        updatedKey,
-        // Update value to...
-        updatedValue,
-      );
+      const updatedQuotes: any = { ...quotesData };
+      const fieldName = updatedKey as keyof QuoteLine;
+      const fieldValue = updatedValue;
+      updatedQuotes[quote_ref_id][cust_id][fieldName] = fieldValue;
+      setQuotesData(updatedQuotes);
     }
   };
   // Effects --------------------------------------------------------
 
   useEffect(() => {
     if (isInitialRender.current) {
+      const cust_id = customer.customer_id;
       // Sets product for customer to first product in range on first render.
-      setProduct(quoteFields[range]['Customer']["quoteProduct"]["displayResults"][0]);
+      setProduct(
+        quoteFields[range]['Customer']['quoteProduct']['displayResults'][0],
+      );
+      const updatedQuotes = funcSetDefaultQuoteValues(
+        { ...quotesData },
+        quote_ref_id,
+        cust_id,
+        quoteFields[range]['ProductOptions'],
+        range,
+        quoteFields[range]['Customer']['quoteProduct']['displayResults'][0],
+      );
+      // Set product code for customer for quote
+      updatedQuotes[quote_ref_id][cust_id]['quoteProductCode'] =
+        funcGetProductCode(customer, updatedQuotes[cust_id], range);
+      setQuotesData(updatedQuotes);
     }
-  }, [quoteFields, range]);
+  }, []);
 
   // JSX build section ----------------------------------------------
   const showCustomerFields = () => {

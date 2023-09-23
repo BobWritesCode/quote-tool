@@ -49,8 +49,6 @@ const QuoteContainer = (props: Props) => {
   // Data ----------------------------------------------------------
   const products: ProductData = productsData;
   const quoteFields: QuoteFields = quoteFieldsData;
-  const currentDate = new Date();
-  const formattedCurrentDate = currentDate.toISOString().substr(0, 10);
   // Handles --------------------------------------------------------
   /**
    *
@@ -77,12 +75,14 @@ const QuoteContainer = (props: Props) => {
     const updatedQuotes: any = { ...quotesData };
     const fieldName = updatedKey as keyof QuoteLine;
     const fieldValue = updatedValue;
-    updatedQuotes[quote_ref_id][customer_id]['ProductCode'] =
-      funcGetProductCode(
-        customerData[customer_id],
-        updatedQuotes[quote_ref_id][customer_id],
-        updatedQuotes[quote_ref_id]['global'],
-      );
+    if (customer_id !== 'global') {
+      updatedQuotes[quote_ref_id][customer_id]['ProductCode'] =
+        funcGetProductCode(
+          customerData[customer_id],
+          updatedQuotes[quote_ref_id][customer_id],
+          updatedQuotes[quote_ref_id]['global'],
+        );
+    }
     updatedQuotes[quote_ref_id][customer_id][fieldName] = fieldValue;
     setQuotesData(updatedQuotes);
     if (updatedKey === 'range') {
