@@ -23,7 +23,7 @@ type Customer = {
   first_name?: string;
   initials?: string;
   last_name?: string;
-  date_of_birth?: string;
+  date_of_birth?: number;
   residence_country?: string;
 };
 type Props = {
@@ -102,6 +102,7 @@ const QuoteLineComp = (props: Props) => {
             displayType={displayType}
             displayResults={displayResults}
             customer={customer}
+            quote={quotesData[quote_ref_id]}
             onChange={(updatedValue: string) =>
               handleChange(
                 updatedValue,

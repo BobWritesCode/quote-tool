@@ -28,10 +28,10 @@
         "displayType": "display",
         "displayResults": ["first_name", "initials", "last_name"]
       },
-      "quoteDOB": {
-        "displayName": "Date of birth",
-        "displayType": "display",
-        "displayResults": ["date_of_birth"]
+      "quoteAge": {
+        "displayName": "Age",
+        "displayType": "displayAge",
+        "displayResults": [""]
       },
       "quoteResidence": {
         "displayName": "Country of residence",
@@ -123,10 +123,10 @@
         "displayType": "display",
         "displayResults": ["first_name", "initials", "last_name"]
       },
-      "quoteDOB": {
-        "displayName": "Date of birth",
-        "displayType": "display",
-        "displayResults": ["date_of_birth"]
+      "quoteAge": {
+        "displayName": "Age",
+        "displayType": "displayAge",
+        "displayResults": [""]
       },
       "quoteResidence": {
         "displayName": "Country of residence",
@@ -309,10 +309,10 @@
         "displayType": "display",
         "displayResults": ["first_name", "initials", "last_name"]
       },
-      "quoteDOB": {
-        "displayName": "Date of birth",
-        "displayType": "display",
-        "displayResults": ["date_of_birth"]
+      "quoteAge": {
+        "displayName": "Age",
+        "displayType": "displayAge",
+        "displayResults": [""]
       },
       "quoteResidence": {
         "displayName": "Country of residence",
@@ -379,10 +379,10 @@
         "displayType": "display",
         "displayResults": ["first_name", "initials", "last_name"]
       },
-      "quoteDOB": {
-        "displayName": "Date of birth",
-        "displayType": "display",
-        "displayResults": ["date_of_birth"]
+      "quoteAge": {
+        "displayName": "Age",
+        "displayType": "displayAge",
+        "displayResults": [""]
       },
       "quoteResidence": {
         "displayName": "Country of residence",

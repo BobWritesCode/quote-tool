@@ -11,7 +11,7 @@ type Customer = {
   first_name?: string;
   initials?: string;
   last_name?: string;
-  date_of_birth?: string;
+  date_of_birth?: number;
   residence_country?: string;
 };
 type Props = {
@@ -22,6 +22,7 @@ type Props = {
   onChange: (e: string) => void;
   customer?: Customer;
   productCode?: String;
+  quote?: any;
 };
 
 // Main -------------------------------------------------------------
@@ -36,6 +37,7 @@ const InputField = (props: Props) => {
     displayType,
     displayName,
     customer,
+    quote,
     displayResults,
     onChange,
     elementIdToUse,
@@ -81,9 +83,9 @@ const InputField = (props: Props) => {
   return (
     <>
       {(() => {
+        let hasMatchingKey = null;
         switch (displayType) {
           case 'display':
-            let hasMatchingKey = null;
             if (customer) {
               // Get customer field keys.
               const customerKeys = Object.keys(customerFieldsData);
@@ -102,6 +104,32 @@ const InputField = (props: Props) => {
                 .map((value) => value)
                 .join('%%%');
             }
+          case 'displayAge':
+            if (customer?.['date_of_birth']) {
+              const date1 = new Date(customer?.['date_of_birth']);
+              const date2 = new Date(quote['global']['start_date']);
+
+              const date1Year = date1.getFullYear();
+              const date1Month = date1.getMonth();
+              const date1Day = date1.getDate();
+
+              const date2Year = date2.getFullYear();
+              const date2Month = date2.getMonth();
+              const date2Day = date2.getDate();
+
+              let age = date2Year - date1Year;
+
+              // Check if the birthday has already occurred this year
+              if (
+                date2Month < date1Month ||
+                (date2Month === date1Month && date2Day < date1Day)
+              ) {
+                age--;
+              }
+
+              return age;
+            }
+            return 'DOB?';
           case 'text':
             return (
               <Form.Control

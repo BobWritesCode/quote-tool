@@ -9,7 +9,7 @@ type Customer = {
   first_name?: string;
   initials?: string;
   last_name?: string;
-  date_of_birth?: string;
+  date_of_birth?: number;
   residence_country?: string;
 };
 type Props = {
