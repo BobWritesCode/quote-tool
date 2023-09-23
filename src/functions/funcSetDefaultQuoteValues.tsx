@@ -1,4 +1,4 @@
-import funcResultsToDisplay from "./funcResultsToDisplay";
+import funcResultsToDisplay from './funcResultsToDisplay';
 
 /**
  *
@@ -20,33 +20,32 @@ function funcSetDefaultQuoteValues(
   range: string,
   product?: string,
 ) {
-
   // Create copy of quotes table.
   const updatedQuotes: any = { ...quotesData };
 
   // Clear product options of target customer.
   updatedQuotes[quote_ref_id][cust_id] = {};
+  if (product) {
+    updatedQuotes[quote_ref_id][cust_id]['quoteProduct'] = product;
+  }
 
   // Loop through all product options to set a default value.
-  Object.values<any>(arr).forEach(
-    (value, index) => {
+  Object.values<any>(arr).forEach((value, index) => {
+    const key = Object.keys(arr)[index];
 
-      const key = Object.keys(arr)[index];
+    let results: any = {};
+    if (product) {
+      results = funcResultsToDisplay(
+        quotesData,
+        quote_ref_id,
+        value[product].displayResults,
+      );
+    } else {
+      results = value.displayResults;
+    }
 
-      let results: any = {}
-      if (product) {
-        results = funcResultsToDisplay(
-          quotesData,
-          quote_ref_id,
-          value[product].displayResults,
-        );
-      } else {
-        results = value.displayResults;
-      }
-
-      updatedQuotes[quote_ref_id][cust_id][key] = results[0];
-    },
-  );
+    updatedQuotes[quote_ref_id][cust_id][key] = results[0];
+  });
   return updatedQuotes;
 }
 

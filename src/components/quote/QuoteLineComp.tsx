@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import quoteFieldsData from '../../data/quote_fields.json';
 import InputField from '../utils/InputField';
 import Price from './Price';
@@ -43,6 +43,7 @@ const QuoteLineComp = (props: Props) => {
   // Props ----------------------------------------------------------
   const { customer, range, quote_ref_id, currency, onChange } = props;
   // Refs -----------------------------------------------------------
+  const isInitialRender = useRef(true);
   // Contexts -------------------------------------------------------
   const [product, setProduct] = useState('');
   const { quotesData, setQuotesData } = useContext(QuotesContext);
@@ -67,7 +68,7 @@ const QuoteLineComp = (props: Props) => {
         range,
         updatedValue,
       );
-      setQuotesData(updatedQuotes)
+      setQuotesData(updatedQuotes);
     } else {
       onChange(
         // Customer id to update.
@@ -82,6 +83,14 @@ const QuoteLineComp = (props: Props) => {
     }
   };
   // Effects --------------------------------------------------------
+
+  useEffect(() => {
+    if (isInitialRender.current) {
+      // Sets product for customer to first product in range on first render.
+      setProduct(quoteFields[range]['Customer']["quoteProduct"]["displayResults"][0]);
+    }
+  }, [quoteFields, range]);
+
   // JSX build section ----------------------------------------------
   const showCustomerFields = () => {
     return Object.values<CustomerOptions>(quoteFields[range]['Customer']).map(
@@ -114,7 +123,11 @@ const QuoteLineComp = (props: Props) => {
           elementIdToUse={generateElementUniqueID()}
           displayName={key.displayName}
           displayType={key[product]['displayType']}
-          displayResults={funcResultsToDisplay(quotesData, quote_ref_id, key[product]['displayResults'])}
+          displayResults={funcResultsToDisplay(
+            quotesData,
+            quote_ref_id,
+            key[product]['displayResults'],
+          )}
           // productCode={prodCode}
           customer={customer}
           onChange={(updatedValue: string) =>
