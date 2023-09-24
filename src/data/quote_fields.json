@@ -451,17 +451,24 @@
           "displayType": "select",
           "displayResults": ["Included", "Excluded"]
         },
-        "Silver": {
-          "displayType": "select",
-          "displayResults": ["Included", "Excluded"]
-        },
         "Hard": {
           "displayType": "select",
           "displayResults": ["Included", "Excluded"]
+        }
+      },
+      "quoteProductCode": {
+        "displayName": "Product Code",
+        "Easy": {
+          "displayType": "displayProductCode",
+          "displayResults": ["quoteProductCode"]
         },
-        "Platinum": {
-          "displayType": "display",
-          "displayResults": ["Worldwide"]
+        "Medium": {
+          "displayType": "displayProductCode",
+          "displayResults": ["quoteProductCode"]
+        },
+        "Hard": {
+          "displayType": "displayProductCode",
+          "displayResults": ["quoteProductCode"]
         }
       }
     }

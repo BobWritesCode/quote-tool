@@ -130,6 +130,10 @@ const InputField = (props: Props) => {
               return age;
             }
             return 'DOB?';
+
+          case 'displayProductCode':
+            return quote.quoteProductCode ? quote.quoteProductCode : '';
+
           case 'text':
             return (
               <Form.Control

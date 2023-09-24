@@ -7,13 +7,32 @@ type Customer = {
   residence_country?: string;
 };
 
-function funcGetProductCode(customerDetails: Customer, QuoteLine:any, productRange:any) {
+function funcGetProductCode(
+  customerDetails: Customer,
+  QuoteLine: any,
+  quoteData: any,
+): string {
+  console.log('customerDetails', customerDetails);
+  console.log('QuoteLine', QuoteLine);
+  console.log('quoteData', quoteData);
 
-  // console.log(customerDetails);
-  // console.log(QuoteLine);
-  // console.log(productRange);
-
-  return "test";
+  switch (quoteData['range']) {
+    case 'GHP v1':
+      return '';
+    case 'GHP v2':
+      return '';
+    case 'WHO':
+      return '';
+    case 'LL':
+      const country:string = customerDetails["residence_country"] || "";
+      const product:string = QuoteLine["quoteProduct"] || "";
+      const deductible:string = QuoteLine["quoteIPDeductible"] || "";
+      const currency:string = quoteData["currency"] || "";
+      const prodCode = `${country}${product}${deductible}${currency}`;
+      console.log(prodCode);
+      return prodCode;
+    default:
+      return '';
+  }
 }
-
 export default funcGetProductCode;

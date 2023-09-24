@@ -51,6 +51,7 @@ const QuoteLineComp = (props: Props) => {
   // Contexts -------------------------------------------------------
   const [product, setProduct] = useState('');
   const { quotesData, setQuotesData } = useContext(QuotesContext);
+  console.log(quotesData[quote_ref_id][customer.customer_id]);
   // Variables ------------------------------------------------------
   // Data -----------------------------------------------------------
   const quoteFields: QuoteFields = quoteFieldsData;
@@ -74,7 +75,7 @@ const QuoteLineComp = (props: Props) => {
       );
       // Set product code for customer for quote
       updatedQuotes[quote_ref_id][cust_id]['quoteProductCode'] =
-        funcGetProductCode(customer, updatedQuotes[cust_id], range);
+        funcGetProductCode(customer, updatedQuotes[quote_ref_id][cust_id], updatedQuotes[quote_ref_id]["global"]);
       setQuotesData(updatedQuotes);
     } else {
       const updatedQuotes: any = { ...quotesData };
@@ -103,7 +104,7 @@ const QuoteLineComp = (props: Props) => {
       );
       // Set product code for customer for quote
       updatedQuotes[quote_ref_id][cust_id]['quoteProductCode'] =
-        funcGetProductCode(customer, updatedQuotes[cust_id], range);
+        funcGetProductCode(customer, updatedQuotes[quote_ref_id][cust_id], updatedQuotes[quote_ref_id]["global"]);
       setQuotesData(updatedQuotes);
     }
   }, []);
@@ -148,6 +149,7 @@ const QuoteLineComp = (props: Props) => {
           )}
           // productCode={prodCode}
           customer={customer}
+          quote={quotesData[quote_ref_id][customer.customer_id]}
           onChange={(updatedValue: string) =>
             handleChange(
               updatedValue,
