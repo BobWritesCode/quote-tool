@@ -92,21 +92,33 @@ const QuoteContainer = (props: TProps) => {
 
   // Effects --------------------------------------------------------
   // JSX build section ----------------------------------------------
-  const showAddQuoteButton = () => {
+  /**
+   *
+   * @returns
+   */
+  const jsxAddQuoteButton = () => {
     return (
       <Button variant="success" onClick={handleAddQuote}>
         Add quote...
       </Button>
     );
   };
-  const showDeleteQuoteButton = () => {
+  /**
+   *
+   * @returns
+   */
+  const jsxDeleteQuoteButton = () => {
     return (
       <Button variant="danger" value={quote_ref_id} onClick={handleRemoveQuote}>
         Delete quote...
       </Button>
     );
   };
-  const showGlobalQuoteOptions = () => {
+  /**
+   *
+   * @returns
+   */
+  const jsxGlobalQuoteOptions = () => {
     if (Object.keys(quotesData[quote_ref_id]['global']).length === 0) {
       const updatedQuotes = funcSetDefaultQuoteValues(
         quotesData,
@@ -144,8 +156,8 @@ const QuoteContainer = (props: TProps) => {
     <div className={`${appStyles.Box} mb-2 p-3`}>
       {/* Quote ref: {quote_ref_id} */}
       <br />
-      {!showProductRangeSelection && showAddQuoteButton()}
-      {showProductRangeSelection && showGlobalQuoteOptions()}
+      {!showProductRangeSelection && jsxAddQuoteButton()}
+      {showProductRangeSelection && jsxGlobalQuoteOptions()}
       {quotesData[quote_ref_id]['global']['start_date'] &&
         !quotesData[quote_ref_id]['global']?.['range'] && (
           <>
@@ -204,7 +216,7 @@ const QuoteContainer = (props: TProps) => {
           </tbody>
         </Table>
       )}
-      {showProductRangeSelection && showDeleteQuoteButton()}
+      {showProductRangeSelection && jsxDeleteQuoteButton()}
     </div>
   );
 };
