@@ -7,7 +7,7 @@ import customerFieldsData from '../../data/customer_fields.json';
 import Table from 'react-bootstrap/Table';
 import { QuotesContext } from '../../contexts/QuotesContext';
 // Types ------------------------------------------------------------
-type Customer = {
+type TCustomer = {
   customer_id: string;
   [key: string]: string | number;
 };
@@ -27,7 +27,7 @@ const CustomerContainer = () => {
    * Add customer input row, and add customer too all quotes.
    */
   const handleAddCustomerSlot = () => {
-    const newCustomer: Customer = {
+    const newCustomer: TCustomer = {
       customer_id: String(nextCustomerId),
     };
     const updatedCustomers = { ...customerData };
@@ -62,7 +62,7 @@ const CustomerContainer = () => {
    */
   const handleUpdate = (
     targetId: string,
-    updatedKey: keyof Customer,
+    updatedKey: keyof TCustomer,
     updatedValue: string,
   ) => {
     const updatedCustomers: any = { ...customerData };

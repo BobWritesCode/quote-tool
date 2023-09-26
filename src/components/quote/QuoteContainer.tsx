@@ -12,21 +12,21 @@ import QuoteLineComp from './QuoteLineComp';
 import funcGetProductCode from '../../functions/funcGetProductCode';
 import funcSetDefaultQuoteValues from '../../functions/funcSetDefaultQuoteValues';
 // Types ------------------------------------------------------------
-type ProductData = {
+type TProductData = {
   [key: string]: any;
 };
-type QuoteFields = {
+type TQuoteFields = {
   [key: string]: any;
 };
-type Props = {
+type TProps = {
   quote_ref_id: string;
   onAddQuote: () => void;
   onRemoveQuote: (customerId: string) => void;
 };
-type QuoteLine = {
-  [key: string]: string | number;
+type TQuoteLine = {
+  [key: string]: string | number | string[];
 };
-type Customer = {
+type TCustomer = {
   customer_id: string;
   first_name?: string;
   initials?: string;
@@ -35,7 +35,7 @@ type Customer = {
   residence_country?: string;
 };
 // Main -------------------------------------------------------------
-const QuoteContainer = (props: Props) => {
+const QuoteContainer = (props: TProps) => {
   // Props -----------------------------------------------------------
   const { quote_ref_id, onAddQuote, onRemoveQuote } = props;
   // Refs -----------------------------------------------------------
@@ -47,8 +47,8 @@ const QuoteContainer = (props: Props) => {
     useState(false);
   const [range, setRange] = useState('');
   // Data ----------------------------------------------------------
-  const products: ProductData = productsData;
-  const quoteFields: QuoteFields = quoteFieldsData;
+  const products: TProductData = productsData;
+  const quoteFields: TQuoteFields = quoteFieldsData;
   // Handles --------------------------------------------------------
   /**
    *
@@ -73,7 +73,7 @@ const QuoteContainer = (props: Props) => {
     updatedValue: string | number,
   ) => {
     const updatedQuotes: any = { ...quotesData };
-    const fieldName = updatedKey as keyof QuoteLine;
+    const fieldName = updatedKey as keyof TQuoteLine;
     const fieldValue = updatedValue;
     if (customer_id !== 'global') {
       updatedQuotes[quote_ref_id][customer_id]['ProductCode'] =
@@ -178,7 +178,7 @@ const QuoteContainer = (props: Props) => {
             </tr>
           </thead>
           <tbody>
-            {Object.values(customerData).map((customer: Customer, i) => (
+            {Object.values(customerData).map((customer: TCustomer, i) => (
               <tr key={i}>
                 <QuoteLineComp
                   customer={customer}

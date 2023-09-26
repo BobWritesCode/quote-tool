@@ -6,21 +6,23 @@ import Button from 'react-bootstrap/Button';
 import customerFieldsData from '../../data/customer_fields.json';
 // Types ------------------------------------------------------------
 
-type Customer = {
+type TCustomer = {
   customer_id: string;
   first_name?: string;
   initials?: string;
   last_name?: string;
   date_of_birth?: number;
   residence_country?: string;
+  age?:string;
 };
-type Props = {
+
+type TProps = {
   displayName: string;
   displayType: string;
   displayResults: string[];
   elementIdToUse: string;
   onChange: (e: string) => void;
-  customer?: Customer;
+  customer?: TCustomer;
   productCode?: String;
   quote?: any;
 };
@@ -31,7 +33,7 @@ type Props = {
  * @param props
  * @returns
  */
-const InputField = (props: Props) => {
+const InputField = (props: TProps) => {
   // Props ----------------------------------------------------------
   const {
     displayType,
@@ -96,8 +98,8 @@ const InputField = (props: Props) => {
             }
             // If find matching keys, then use customer dict to get strings, and add spaces between entries.
             if (hasMatchingKey) {
-              return (displayResults as (keyof Customer)[])
-                .map((value: keyof Customer) => customer?.[value])
+              return (displayResults as (keyof TCustomer)[])
+                .map((value: keyof TCustomer) => customer?.[value])
                 .join(' ');
             } else {
               return Object.values(displayResults)

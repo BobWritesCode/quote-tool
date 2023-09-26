@@ -1,4 +1,4 @@
-type Customer = {
+type TCustomer = {
   customer_id: string;
   first_name?: string;
   initials?: string;
@@ -8,7 +8,7 @@ type Customer = {
 };
 
 function funcGetProductCode(
-  customerDetails: Customer,
+  customerDetails: TCustomer,
   QuoteLine: any,
   quoteData: any,
 ): string {

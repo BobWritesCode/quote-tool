@@ -10,11 +10,11 @@ import { QuotesContext } from '../../contexts/QuotesContext';
 import { CustomerContext } from '../../contexts/CustomerDataContext';
 
 // Types ------------------------------------------------------------
-type QuoteLine = {
-  [key: string]: string | number;
+type TQuoteLine = {
+  [key: string]: string | number | string[];
 };
-type Quote = {
-  [key: string]: QuoteLine;
+type TQuote = {
+  [key: string]: TQuoteLine;
 };
 // Main -------------------------------------------------------------
 const QuotesContainer = () => {
@@ -32,7 +32,7 @@ const QuotesContainer = () => {
    *
    */
   const handleAddQuoteSlot = useCallback(() => {
-    const newQuote: Quote = {
+    const newQuote: TQuote = {
       global: {}, // Add a "global" entry with an empty object
       ...Object.keys(customerData).reduce((acc: any, customerId: any) => {
         acc[customerId] = {};
@@ -40,7 +40,7 @@ const QuotesContainer = () => {
       }, {}),
     };
     setNextTempQuoteId(nextTempQuoteId + 1);
-    setQuotesData((prevQuotes: Quote) => ({
+    setQuotesData((prevQuotes: TQuote) => ({
       ...prevQuotes,
       [String(nextTempQuoteId)]: newQuote,
     }));

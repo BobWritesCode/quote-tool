@@ -8,18 +8,19 @@ import funcSetDefaultQuoteValues from '../../functions/funcSetDefaultQuoteValues
 import funcResultsToDisplay from '../../functions/funcResultsToDisplay';
 import funcGetProductCode from '../../functions/funcGetProductCode';
 // Types ------------------------------------------------------------
-type CustomerOptions = {
+type TCustomerOptions = {
   displayName: string;
   displayType: string;
   displayResults: string[];
 };
-type ProductOptions = {
+type TProductOptions = {
   displayName: string;
 } & Record<string, any>;
-type QuoteFields = {
+
+type TQuoteFields = {
   [key: string]: any;
 };
-type Customer = {
+type TCustomer = {
   customer_id: string;
   first_name?: string;
   initials?: string;
@@ -27,11 +28,11 @@ type Customer = {
   date_of_birth?: number;
   residence_country?: string;
 };
-type QuoteLine = {
-  [key: string]: string | number;
+type TQuoteLine = {
+  [key: string]: string | number | string[];
 };
-type Props = {
-  customer: Customer;
+type TProps = {
+  customer: TCustomer;
   range: string;
   quote_ref_id: string;
   currency: string | number;
@@ -43,7 +44,7 @@ type Props = {
   ) => void;
 };
 // Main -------------------------------------------------------------
-const QuoteLineComp = (props: Props) => {
+const QuoteLineComp = (props: TProps) => {
   // Props ----------------------------------------------------------
   const { customer, range, quote_ref_id, currency, onChange } = props;
   // Refs -----------------------------------------------------------
@@ -54,7 +55,7 @@ const QuoteLineComp = (props: Props) => {
   console.log(quotesData[quote_ref_id][customer.customer_id]);
   // Variables ------------------------------------------------------
   // Data -----------------------------------------------------------
-  const quoteFields: QuoteFields = quoteFieldsData;
+  const quoteFields: TQuoteFields = quoteFieldsData;
   // Handles --------------------------------------------------------
   /**
    *
@@ -79,7 +80,7 @@ const QuoteLineComp = (props: Props) => {
       setQuotesData(updatedQuotes);
     } else {
       const updatedQuotes: any = { ...quotesData };
-      const fieldName = updatedKey as keyof QuoteLine;
+      const fieldName = updatedKey as keyof TQuoteLine;
       const fieldValue = updatedValue;
       updatedQuotes[quote_ref_id][cust_id][fieldName] = fieldValue;
       setQuotesData(updatedQuotes);
@@ -111,7 +112,7 @@ const QuoteLineComp = (props: Props) => {
 
   // JSX build section ----------------------------------------------
   const showCustomerFields = () => {
-    return Object.values<CustomerOptions>(quoteFields[range]['Customer']).map(
+    return Object.values<TCustomerOptions>(quoteFields[range]['Customer']).map(
       ({ displayName, displayType, displayResults }, index: number) => (
         <td key={index}>
           <InputField
@@ -134,7 +135,7 @@ const QuoteLineComp = (props: Props) => {
   };
 
   const showProductFields = () => {
-    return Object.values<ProductOptions>(
+    return Object.values<TProductOptions>(
       quoteFields[range]['ProductOptions'],
     ).map((key, index) => (
       <td key={index}>

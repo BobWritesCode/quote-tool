@@ -1,17 +1,17 @@
 import { createContext, useState, ReactNode } from 'react';
 
 // Types ------------------------------------------------------------
-type QuoteLine = {
-  [key: string]: string | number;
+type TQuoteLine = {
+  [key: string]: string | number | string[];
 };
-type Quote = {
-  [key: string]: QuoteLine;
+type TQuote = {
+  [key: string]: TQuoteLine;
 };
-type Quotes = {
-  [key: string]: Quote;
+type TQuotes = {
+  [key: string]: TQuote;
 };
 type QuotesContextType = {
-  quotesData: Quotes;
+  quotesData: TQuotes;
   setQuotesData: React.Dispatch<any>;
 };
 
@@ -26,7 +26,7 @@ export const QuotesContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [quotesData, setQuotesData] = useState<Quotes>({});
+  const [quotesData, setQuotesData] = useState<TQuotes>({});
 
   return (
     <QuotesContext.Provider value={{ quotesData, setQuotesData }}>
