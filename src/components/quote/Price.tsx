@@ -1,13 +1,13 @@
 import React from 'react';
 import PricingCurrent from './PricingCurrent';
 // Types ------------------------------------------------------------
-type Props = {
+type TProps = {
   product: string;
   quoteRefId: string;
   customerRefId: string;
 };
 // Main -------------------------------------------------------------
-const Price = (props: Props) => {
+const Price = (props: TProps) => {
   // Props ----------------------------------------------------------
   const { product, quoteRefId, customerRefId } = props;
   // Refs -----------------------------------------------------------

@@ -3,11 +3,11 @@ import Spinner from 'react-bootstrap/Spinner';
 import PropTypes from 'prop-types';
 
 // Types ------------------------------------------------------------
-type Props = {
+type TProps = {
   variant: string;
 };
 // Main -------------------------------------------------------------
-const MySpinner = (props: Props) => {
+const MySpinner = (props: TProps) => {
   // Props ----------------------------------------------------------
   const { variant = 'light' } = props;
   // Refs -----------------------------------------------------------

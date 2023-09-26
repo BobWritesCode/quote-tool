@@ -1,13 +1,13 @@
 import { createContext, useState, ReactNode } from 'react';
 
 // types ------------------------------------------------------------
-type Customer = {
+type TCustomer = {
   customer_id: string;
   [key: string]: string | number;
 };
-type Customers = { [key: string]: Customer };
+type TCustomers = { [key: string]: TCustomer };
 type CustomerContextType = {
-  customerData: Customers;
+  customerData: TCustomers;
   setCustomerData: React.Dispatch<any>;
 };
 // exports ----------------------------------------------------------
@@ -20,7 +20,7 @@ export const CustomerContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [customerData, setCustomerData] = useState<Customers>({});
+  const [customerData, setCustomerData] = useState<TCustomers>({});
   return (
     <CustomerContext.Provider value={{ customerData, setCustomerData }}>
       {children}

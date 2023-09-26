@@ -3,12 +3,12 @@ import { QuotesContext } from '../../contexts/QuotesContext';
 import { CustomerContext } from '../../contexts/CustomerDataContext';
 
 // Types ------------------------------------------------------------
-type Props = {
+type TProps = {
   quoteRefId: string;
   customerRefId: string;
 };
 // Main -------------------------------------------------------------
-const PricingCurrent = (props: Props) => {
+const PricingCurrent = (props: TProps) => {
   // Props ----------------------------------------------------------
   const { quoteRefId, customerRefId } = props;
   // Refs -----------------------------------------------------------

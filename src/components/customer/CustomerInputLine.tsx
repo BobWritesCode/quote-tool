@@ -4,7 +4,7 @@ import customerFieldsData from '../../data/customer_fields.json';
 import InputField from '../utils/InputField';
 import generateElementUniqueID from '../utils/generateId';
 // Types ------------------------------------------------------------
-type Customer = {
+type TCustomer = {
   customer_id: string;
   first_name?: string;
   initials?: string;
@@ -12,8 +12,8 @@ type Customer = {
   date_of_birth?: number;
   residence_country?: string;
 };
-type Props = {
-  customer: Customer;
+type TProps = {
+  customer: TCustomer;
   customerId: number;
   onUpdate: (
     targetId: string,
@@ -23,7 +23,7 @@ type Props = {
   onRemoveCustomerSlot: (customerId: string) => void;
 };
 
-type FieldsType = {
+type TFieldsType = {
   [key: string]: {
     displayName: string;
     displayType: string;
@@ -32,10 +32,10 @@ type FieldsType = {
 };
 
 // Main -------------------------------------------------------------
-const CustomerInputLine = (props: Props) => {
+const CustomerInputLine = (props: TProps) => {
   // Props ----------------------------------------------------------
   const { onRemoveCustomerSlot, customer, onUpdate } = props;
-  const customerFields: FieldsType = customerFieldsData;
+  const customerFields: TFieldsType = customerFieldsData;
   // Refs -----------------------------------------------------------
   // Contexts -------------------------------------------------------
   // Variables ------------------------------------------------------
