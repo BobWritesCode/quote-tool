@@ -204,8 +204,7 @@ const QuoteLineComp = (props: TProps) => {
       <td>
         <Price
           product={'Current'}
-          customerRefId={String(customer.customer_id)}
-          quoteRefId={quote_ref_id}
+          returnPrice={()=>''}
         />
       </td>
     ));

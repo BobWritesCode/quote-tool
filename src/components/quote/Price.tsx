@@ -1,15 +1,14 @@
 import React from 'react';
-import PricingCurrent from './PricingCurrent';
+
 // Types ------------------------------------------------------------
 type TProps = {
   product: string;
-  quoteRefId: string;
-  customerRefId: string;
+  returnPrice: () => void;
 };
 // Main -------------------------------------------------------------
 const Price = (props: TProps) => {
   // Props ----------------------------------------------------------
-  const { product, quoteRefId, customerRefId } = props;
+  const { product, returnPrice } = props;
   // Refs -----------------------------------------------------------
   // Contexts -------------------------------------------------------
   // Variables ------------------------------------------------------
@@ -19,16 +18,7 @@ const Price = (props: TProps) => {
   // Return ---------------------------------------------------------
   return (
     <>
-      {(() => {
-        switch (product) {
-          case 'Current':
-            return <PricingCurrent quoteRefId={quoteRefId} customerRefId={customerRefId} />;
-          case 'Legacy':
-            return 'Banana is good!';
-          default:
-            return 'N/A';
-        }
-      })()}
+
     </>
   );
 };
