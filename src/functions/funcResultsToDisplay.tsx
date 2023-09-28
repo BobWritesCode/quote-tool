@@ -18,15 +18,8 @@ const funcResultsToDisplay = (
   quote_ref_id: string,
   displayResults: any,
 ) => {
-  if (displayResults.displayResultVariable) {
-    displayResults =
-      displayResults[
-        quotesData[quote_ref_id]['global'][
-          `${displayResults.displayResultVariable}`
-        ]
-      ];
-  }
-  return displayResults;
-};
+  return displayResults.displayResultVariable ?
+    displayResults[quotesData[quote_ref_id]['global'][`${displayResults.displayResultVariable}`]] : displayResults;
+}
 
 export default funcResultsToDisplay;
