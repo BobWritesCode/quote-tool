@@ -29,6 +29,7 @@ const CustomerContainer = () => {
   const handleAddCustomerSlot = () => {
     const newCustomer: TCustomer = {
       customer_id: String(nextCustomerId),
+      quoteProductCode:[''],
     };
     const updatedCustomers = { ...customerData };
     updatedCustomers[nextCustomerId] = newCustomer;
@@ -37,7 +38,7 @@ const CustomerContainer = () => {
     // Add customer to all quotes
     const updatedQuotes = { ...quotesData };
     for (const quote in updatedQuotes) {
-      updatedQuotes[quote][nextCustomerId] = {};
+      updatedQuotes[quote][nextCustomerId] = {quoteProductCode:['']};
     }
     setQuotesData(updatedQuotes);
   };
