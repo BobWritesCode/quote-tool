@@ -151,71 +151,67 @@ const QuoteContainer = (props: TProps) => {
       </div>
     );
   };
+  /**
+   *
+   * @returns JSX element
+   */
+  const jsxQuoteTable = () => {
+    const ProductOptions = Object.values(quoteFields[range]['ProductOptions']);
+    const CustomerDetails = Object.values(quoteFields[range]['Customer']);
+    const ProductCode = Object.values(
+      quotesData[quote_ref_id][0].quoteProductCode,
+    );
+    const CustomerData = Object.values(customerData);
+
+    return (
+      <Table striped bordered hover size="sm">
+        <thead>
+          <tr>
+            {CustomerDetails.map((key: any, index: number) => (
+              <th key={index}>{key.displayName}</th>
+            ))}
+            {ProductOptions.map((key: any, index: number) => (
+              <th key={index}>{key.displayName}</th>
+            ))}
+            {ProductCode.map((k, i) => (
+              <th>Price</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {CustomerData.map((customer: TCustomer, i) => (
+            <tr key={i}>
+              <QuoteLineComp
+                customer={customer}
+                range={range}
+                quote_ref_id={quote_ref_id}
+                currency={quotesData[quote_ref_id]['global'].currency}
+              />
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    );
+  };
   // Return ---------------------------------------------------------
   return (
     <div className={`${appStyles.Box} mb-2 p-3`}>
-      {/* Quote ref: {quote_ref_id} */}
       <br />
       {!showProductRangeSelection && jsxAddQuoteButton()}
       {showProductRangeSelection && jsxGlobalQuoteOptions()}
       {quotesData[quote_ref_id]['global']['start_date'] &&
         !quotesData[quote_ref_id]['global']?.['range'] && (
-          <>
-            <InputField
-              displayType={'buttons'}
-              displayName={'Range selection'}
-              displayResults={Object.keys(products)}
-              onChange={(updatedValue: string) =>
-                handleChange('global', quote_ref_id, 'range', updatedValue)
-              }
-              elementIdToUse={''}
-            />
-          </>
+          <InputField
+            displayType={'buttons'}
+            displayName={'Range selection'}
+            displayResults={Object.keys(products)}
+            onChange={(updatedValue: string) =>
+              handleChange('global', quote_ref_id, 'range', updatedValue)
+            }
+            elementIdToUse={''}
+          />
         )}
-      {quotesData[quote_ref_id]?.['global']['range'] && (
-        <Table striped bordered hover size="sm">
-          <thead>
-            <tr>
-              {Object.values(quoteFields[range]['Customer']).map(
-                (key: any, index: number) => (
-                  <th key={index}>{key.displayName}</th>
-                ),
-              )}
-              {Object.values(quoteFields[range]['ProductOptions']).map(
-                (key: any, index: number) => (
-                  <th key={index}>{key.displayName}</th>
-                ),
-              )}
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.values(customerData).map((customer: TCustomer, i) => (
-              <tr key={i}>
-                <QuoteLineComp
-                  customer={customer}
-                  range={range}
-                  quote_ref_id={quote_ref_id}
-                  currency={quotesData[quote_ref_id]['global'].currency}
-                  onChange={(
-                    customer_id,
-                    quote_ref_id,
-                    updatedKey,
-                    updatedValue,
-                  ) =>
-                    handleChange(
-                      customer_id,
-                      quote_ref_id,
-                      updatedKey,
-                      updatedValue,
-                    )
-                  }
-                />
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
+      {quotesData[quote_ref_id]?.['global']['range'] && jsxQuoteTable()}
       {showProductRangeSelection && jsxDeleteQuoteButton()}
     </div>
   );
