@@ -57,19 +57,6 @@ const CustomerContainer = () => {
     }
     setQuotesData(updatedQuotes);
   };
-  /**
-   * Update customer dict
-   * @param e Customer data to update
-   */
-  const handleUpdate = (
-    targetId: string,
-    updatedKey: keyof TCustomer,
-    updatedValue: string,
-  ) => {
-    const updatedCustomers: any = { ...customerData };
-    updatedCustomers[targetId][updatedKey] = updatedValue;
-    setCustomerData(updatedCustomers);
-  };
   // Effects --------------------------------------------------------
   // Return ---------------------------------------------------------
   return (
@@ -89,11 +76,6 @@ const CustomerContainer = () => {
               customer={customer}
               customerId={nextCustomerId}
               onRemoveCustomerSlot={handleRemoveCustomerSlot}
-              onUpdate={(
-                targetId: string,
-                updatedKey: string,
-                updatedValue: string,
-              ) => handleUpdate(targetId, updatedKey, updatedValue)}
             />
           ))}
         </tbody>
