@@ -4,6 +4,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button from 'react-bootstrap/Button';
 import customerFieldsData from '../../data/customer_fields.json';
+import funcGetAge from '../../functions/funcGetAge';
 // Types ------------------------------------------------------------
 
 type TCustomer = {
@@ -13,7 +14,7 @@ type TCustomer = {
   last_name?: string;
   date_of_birth?: number;
   residence_country?: string;
-  age?:string;
+  age?: string;
 };
 
 type TProps = {
@@ -110,26 +111,7 @@ const InputField = (props: TProps) => {
             if (customer?.['date_of_birth']) {
               const date1 = new Date(customer?.['date_of_birth']);
               const date2 = new Date(quote['global']['start_date']);
-
-              const date1Year = date1.getFullYear();
-              const date1Month = date1.getMonth();
-              const date1Day = date1.getDate();
-
-              const date2Year = date2.getFullYear();
-              const date2Month = date2.getMonth();
-              const date2Day = date2.getDate();
-
-              let age = date2Year - date1Year;
-
-              // Check if the birthday has already occurred this year
-              if (
-                date2Month < date1Month ||
-                (date2Month === date1Month && date2Day < date1Day)
-              ) {
-                age--;
-              }
-
-              return age;
+              return funcGetAge(date1, date2);
             }
             return 'DOB?';
 
