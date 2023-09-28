@@ -18,7 +18,12 @@ type TFieldsType = {
   };
 };
 
-// Main -------------------------------------------------------------
+type TProps = {
+  customer: TCustomer;
+  customerId: number;
+  onRemoveCustomerSlot: (customerId: string) => void;
+};
+
 const CustomerInputLine = (props: TProps) => {
   // Props ----------------------------------------------------------
   const { onRemoveCustomerSlot, customer, onUpdate } = props;
