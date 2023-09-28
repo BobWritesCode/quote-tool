@@ -9,8 +9,8 @@ import { QuotesContext } from '../../contexts/QuotesContext';
 // Types ------------------------------------------------------------
 type TCustomer = {
   customer_id: string;
-  [key: string]: string | number;
-};
+} & Record<string, any>;
+
 // Main -------------------------------------------------------------
 const CustomerContainer = () => {
   // Props ----------------------------------------------------------
