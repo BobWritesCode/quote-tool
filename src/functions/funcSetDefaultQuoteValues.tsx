@@ -12,7 +12,7 @@ import funcResultsToDisplay from './funcResultsToDisplay';
  */
 function funcSetDefaultQuoteValues(
   quotesData: {
-    [key: string]: { [key: string]: { [key: string]: string | number } };
+    [key: string]: { [key: string]: { [key: string]: string | number | string[] } };
   },
   quote_ref_id: string,
   cust_id: string,
