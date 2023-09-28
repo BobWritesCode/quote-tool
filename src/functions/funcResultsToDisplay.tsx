@@ -11,9 +11,11 @@
  */
 const funcResultsToDisplay = (
   quotesData: {
-    [x: string]:
-      | { [key: string]: { [key: string]: string | number } }
-      | { [x: string]: { [x: string]: string | number } };
+    [key:string]: {
+      [key:string]: {
+        [key:string]: any;
+      }
+    }
   },
   quote_ref_id: string,
   displayResults: any,
