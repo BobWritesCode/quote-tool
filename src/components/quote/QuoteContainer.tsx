@@ -94,7 +94,7 @@ const QuoteContainer = (props: TProps) => {
   // JSX build section ----------------------------------------------
   /**
    *
-   * @returns
+   * @returns JSX element
    */
   const jsxAddQuoteButton = () => {
     return (
@@ -105,7 +105,7 @@ const QuoteContainer = (props: TProps) => {
   };
   /**
    *
-   * @returns
+   * @returns JSX element
    */
   const jsxDeleteQuoteButton = () => {
     return (
@@ -116,7 +116,7 @@ const QuoteContainer = (props: TProps) => {
   };
   /**
    *
-   * @returns
+   * @returns JSX element
    */
   const jsxGlobalQuoteOptions = () => {
     if (Object.keys(quotesData[quote_ref_id]['global']).length === 0) {
