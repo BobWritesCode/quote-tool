@@ -8,6 +8,7 @@ type TCustomer = {
   customer_id: string;
 } & Record<string, string>;
 
+type TCustomers = { [key: string]: TCustomer };
 
 type TFieldsType = {
   [key: string]: {
