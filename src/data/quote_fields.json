@@ -68,8 +68,8 @@
           "displayResults": ["N/A"]
         }
       },
-      "quoteOPDeductible": {
-        "displayName": "Co-insurance",
+      "quoteOPCoInsurance": {
+        "displayName": "Outpatient Co-insurance",
         "Major": {
           "displayType": "display",
           "displayResults": ["N/A"]
@@ -111,6 +111,29 @@
         },
         "Platinum": {
           "displayType": "text",
+          "displayResults": [""]
+        }
+      },
+      "quoteProductCode": {
+        "displayName": "Product Code",
+        "Major": {
+          "displayType": "displayProductCode",
+          "displayResults": [""]
+        },
+        "Bronze": {
+          "displayType": "displayProductCode",
+          "displayResults": [""]
+        },
+        "Silver": {
+          "displayType": "displayProductCode",
+          "displayResults": [""]
+        },
+        "Gold": {
+          "displayType": "displayProductCode",
+          "displayResults": [""]
+        },
+        "Platinum": {
+          "displayType": "displayProductCode",
           "displayResults": [""]
         }
       }
@@ -460,15 +483,15 @@
         "displayName": "Product Code",
         "Easy": {
           "displayType": "displayProductCode",
-          "displayResults": ["quoteProductCode"]
+          "displayResults": [""]
         },
         "Medium": {
           "displayType": "displayProductCode",
-          "displayResults": ["quoteProductCode"]
+          "displayResults": [""]
         },
         "Hard": {
           "displayType": "displayProductCode",
-          "displayResults": ["quoteProductCode"]
+          "displayResults": [""]
         }
       }
     }
