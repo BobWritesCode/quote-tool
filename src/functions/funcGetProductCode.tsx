@@ -1,5 +1,6 @@
 type TCustomer = {
   customer_id: string;
+  age?: string;
   first_name?: string;
   initials?: string;
   last_name?: string;
@@ -9,30 +10,40 @@ type TCustomer = {
 
 function funcGetProductCode(
   customerDetails: TCustomer,
-  QuoteLine: any,
+  quoteLine: any,
   quoteData: any,
-): string {
-  console.log('customerDetails', customerDetails);
-  console.log('QuoteLine', QuoteLine);
-  console.log('quoteData', quoteData);
+): string | string[] {
+
+  // console.log('customerDetails', customerDetails);
+  // console.log('quoteLine', quoteLine);
+  // console.log('quoteData', quoteData);
+
+  let country: string = customerDetails['residence_country'] || '';
+  let product: string = quoteLine['quoteProduct'] || '';
+  let currency: string = quoteData['currency'] || '';
+  let age: string = customerDetails['age'] || '';
+  let opCoInsurance: string = quoteLine['quoteOPCoInsurance']  || '';
+  let deductible: string = quoteLine['quoteIPDeductible'] || '';
+  let assistance: string = quoteLine['quoteAssistance'] || '';
+  let prodCode: string = '';
+  let prodCode2: string = '';
 
   switch (quoteData['range']) {
     case 'GHP v1':
-      return '';
+      prodCode = `${country} ${currency} ${product} ${age} ${opCoInsurance}`;
+      return [prodCode];
     case 'GHP v2':
-      return '';
+      return [''];
     case 'WHO':
-      return '';
+      return [''];
     case 'LL':
-      const country:string = customerDetails["residence_country"] || "";
-      const product:string = QuoteLine["quoteProduct"] || "";
-      const deductible:string = QuoteLine["quoteIPDeductible"] || "";
-      const currency:string = quoteData["currency"] || "";
-      const prodCode = `${country}${product}${deductible}${currency}`;
-      console.log(prodCode);
-      return prodCode;
+      prodCode = `${country}${product}${deductible}${currency}`;
+      prodCode2 = `${age}${assistance}`;
+      return [prodCode, prodCode2];
+    case 'LLAssistance':
+      return [''];
     default:
-      return '';
+      return [''];
   }
 }
 export default funcGetProductCode;

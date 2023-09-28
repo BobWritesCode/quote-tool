@@ -1,4 +1,9 @@
-import React, { useState, useContext, useEffect, useRef, useCallback } from 'react';
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useRef,
+} from 'react';
 import quoteFieldsData from '../../data/quote_fields.json';
 import InputField from '../utils/InputField';
 import Price from './Price';
@@ -7,6 +12,7 @@ import { QuotesContext } from '../../contexts/QuotesContext';
 import funcSetDefaultQuoteValues from '../../functions/funcSetDefaultQuoteValues';
 import funcResultsToDisplay from '../../functions/funcResultsToDisplay';
 import funcGetProductCode from '../../functions/funcGetProductCode';
+import { CustomerContext } from '../../contexts/CustomerDataContext';
 // Types ------------------------------------------------------------
 type TCustomerOptions = {
   displayName: string;
@@ -31,29 +37,32 @@ type TCustomer = {
 type TQuoteLine = {
   [key: string]: string | number | string[];
 };
+type TQuote = {
+  [key: string]: TQuoteLine;
+};
+type TQuotes = {
+  [key: string]: TQuote;
+};
+
 type TProps = {
   customer: TCustomer;
   range: string;
   quote_ref_id: string;
-  currency: string | number;
-  onChange: (
-    customer_id: string,
-    quote_ref_id: string,
-    updatedKey: string,
-    updatedValue: string | number,
-  ) => void;
+  currency: string | number | string[];
 };
 // Main -------------------------------------------------------------
 const QuoteLineComp = (props: TProps) => {
+  console.log('QuoteLineComp');
   // Props ----------------------------------------------------------
-  const { customer, range, quote_ref_id, currency, onChange } = props;
+  const { customer, range, quote_ref_id } = props;
+  const cust_id = customer.customer_id;
   // Refs -----------------------------------------------------------
   const isInitialRender = useRef(true);
   // Contexts -------------------------------------------------------
-  const [product, setProduct] = useState('');
   const { quotesData, setQuotesData } = useContext(QuotesContext);
-  console.log(quotesData[quote_ref_id][customer.customer_id]);
+  const { customerData } = useContext(CustomerContext);
   // Variables ------------------------------------------------------
+  const [product, setProduct] = useState('');
   // Data -----------------------------------------------------------
   const quoteFields: TQuoteFields = quoteFieldsData;
   // Handles --------------------------------------------------------
@@ -63,7 +72,6 @@ const QuoteLineComp = (props: TProps) => {
    * @param updatedKey
    */
   const handleChange = (updatedValue: string, updatedKey: string) => {
-    const cust_id = customer.customer_id;
     if (updatedKey === 'quoteProduct') {
       setProduct(updatedValue);
       const updatedQuotes = funcSetDefaultQuoteValues(
@@ -76,21 +84,32 @@ const QuoteLineComp = (props: TProps) => {
       );
       // Set product code for customer for quote
       updatedQuotes[quote_ref_id][cust_id]['quoteProductCode'] =
-        funcGetProductCode(customer, updatedQuotes[quote_ref_id][cust_id], updatedQuotes[quote_ref_id]["global"]);
+        funcGetProductCode(
+          customer,
+          updatedQuotes[quote_ref_id][cust_id],
+          updatedQuotes[quote_ref_id]['global'],
+        );
       setQuotesData(updatedQuotes);
     } else {
-      const updatedQuotes: any = { ...quotesData };
+      const updatedQuotes: TQuotes = { ...quotesData };
       const fieldName = updatedKey as keyof TQuoteLine;
       const fieldValue = updatedValue;
       updatedQuotes[quote_ref_id][cust_id][fieldName] = fieldValue;
+      // Set product code for customer for quote
+      updatedQuotes[quote_ref_id][cust_id]['quoteProductCode'] =
+        funcGetProductCode(
+          customer,
+          updatedQuotes[quote_ref_id][cust_id],
+          updatedQuotes[quote_ref_id]['global'],
+        );
       setQuotesData(updatedQuotes);
     }
   };
   // Effects --------------------------------------------------------
 
   useEffect(() => {
+    console.log('QuoteLineComp - useEffect 1');
     if (isInitialRender.current) {
-      const cust_id = customer.customer_id;
       // Sets product for customer to first product in range on first render.
       setProduct(
         quoteFields[range]['Customer']['quoteProduct']['displayResults'][0],
@@ -105,13 +124,29 @@ const QuoteLineComp = (props: TProps) => {
       );
       // Set product code for customer for quote
       updatedQuotes[quote_ref_id][cust_id]['quoteProductCode'] =
-        funcGetProductCode(customer, updatedQuotes[quote_ref_id][cust_id], updatedQuotes[quote_ref_id]["global"]);
+        funcGetProductCode(
+          customer,
+          updatedQuotes[quote_ref_id][cust_id],
+          updatedQuotes[quote_ref_id]['global'],
+        );
       setQuotesData(updatedQuotes);
     }
   }, []);
 
-  // JSX build section ----------------------------------------------
-  const showCustomerFields = () => {
+  useEffect(() => {
+    console.log('QuoteLineComp - useEffect', quote_ref_id, cust_id);
+    const updatedQuotes: TQuotes = { ...quotesData };
+    const newProdCode = funcGetProductCode(
+      customer,
+      quotesData[quote_ref_id][cust_id],
+      quotesData[quote_ref_id]['global'],
+    );
+
+    updatedQuotes[quote_ref_id][cust_id]['quoteProductCode'] = newProdCode;
+    setQuotesData(updatedQuotes);
+  }, [customerData]);
+
+  const jsxCustomerFields = () => {
     return Object.values<TCustomerOptions>(quoteFields[range]['Customer']).map(
       ({ displayName, displayType, displayResults }, index: number) => (
         <td key={index}>
@@ -134,7 +169,7 @@ const QuoteLineComp = (props: TProps) => {
     );
   };
 
-  const showProductFields = () => {
+  const jsxProductFields = () => {
     return Object.values<TProductOptions>(
       quoteFields[range]['ProductOptions'],
     ).map((key, index) => (
@@ -162,8 +197,10 @@ const QuoteLineComp = (props: TProps) => {
     ));
   };
 
-  const showPriceField = () => {
-    return (
+  const jsxPriceField = () => {
+    return Object.values(
+      quotesData[quote_ref_id][customer.customer_id].quoteProductCode,
+    ).map((k, i) => (
       <td>
         <Price
           product={'Current'}
@@ -171,15 +208,15 @@ const QuoteLineComp = (props: TProps) => {
           quoteRefId={quote_ref_id}
         />
       </td>
-    );
+    ));
   };
 
   // Return ---------------------------------------------------------
   return (
     <>
-      {showCustomerFields()}
-      {product && showProductFields()}
-      {showPriceField()}
+      {jsxCustomerFields()}
+      {product && jsxProductFields()}
+      {jsxPriceField()}
     </>
   );
 };

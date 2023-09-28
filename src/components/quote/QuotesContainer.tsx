@@ -35,7 +35,7 @@ const QuotesContainer = () => {
     const newQuote: TQuote = {
       global: {}, // Add a "global" entry with an empty object
       ...Object.keys(customerData).reduce((acc: any, customerId: any) => {
-        acc[customerId] = {};
+        acc[customerId] = {quoteProductCode:['']};
         return acc;
       }, {}),
     };

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Button from 'react-bootstrap/Button';
 import customerFieldsData from '../../data/customer_fields.json';
 import InputField from '../utils/InputField';
 import generateElementUniqueID from '../utils/generateId';
+import { CustomerContext } from '../../contexts/CustomerDataContext';
 // Types ------------------------------------------------------------
 type TCustomer = {
   customer_id: string;
@@ -25,14 +26,21 @@ type TProps = {
 };
 
 const CustomerInputLine = (props: TProps) => {
-  // Props ----------------------------------------------------------
-  const { onRemoveCustomerSlot, customer, onUpdate } = props;
+
+  const { onRemoveCustomerSlot, customer } = props;
   const customerFields: TFieldsType = customerFieldsData;
-  // Refs -----------------------------------------------------------
-  // Contexts -------------------------------------------------------
-  // Variables ------------------------------------------------------
-  // Data -----------------------------------------------------------
-  // Effects --------------------------------------------------------
+  const { customerData, setCustomerData } = useContext(CustomerContext);
+
+  const handleUpdateCustomer = (
+    targetId: string,
+    updatedKey: keyof TCustomer,
+    updatedValue: string,
+  ) => {
+
+    const updatedCustomerData: TCustomers = { ...customerData };
+    updatedCustomerData[targetId][updatedKey] = updatedValue;
+    setCustomerData(updatedCustomerData);
+  };
   // Return ---------------------------------------------------------
   return (
     <tr>
@@ -55,7 +63,7 @@ const CustomerInputLine = (props: TProps) => {
               displayName={displayName}
               displayResults={displayResults}
               onChange={(updatedValue: string) =>
-                onUpdate(customer.customer_id, keyName, updatedValue)
+                handleUpdateCustomer(customer.customer_id, keyName, updatedValue)
               }
             />
           </td>

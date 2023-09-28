@@ -3,15 +3,16 @@ import { createContext, useState, ReactNode } from 'react';
 // types ------------------------------------------------------------
 type TCustomer = {
   customer_id: string;
-  [key: string]: string | number;
-};
+} & Record<string, any>;
+
 type TCustomers = { [key: string]: TCustomer };
-type CustomerContextType = {
+
+type TCustomerContextType = {
   customerData: TCustomers;
   setCustomerData: React.Dispatch<any>;
 };
 // exports ----------------------------------------------------------
-export const CustomerContext = createContext<CustomerContextType>({
+export const CustomerContext = createContext<TCustomerContextType>({
   customerData: {},
   setCustomerData: () => {},
 });
