@@ -6,22 +6,8 @@ import generateElementUniqueID from '../utils/generateId';
 // Types ------------------------------------------------------------
 type TCustomer = {
   customer_id: string;
-  first_name?: string;
-  initials?: string;
-  last_name?: string;
-  date_of_birth?: number;
-  residence_country?: string;
-};
-type TProps = {
-  customer: TCustomer;
-  customerId: number;
-  onUpdate: (
-    targetId: string,
-    updatedKey: string,
-    updatedValue: string,
-  ) => void;
-  onRemoveCustomerSlot: (customerId: string) => void;
-};
+} & Record<string, string>;
+
 
 type TFieldsType = {
   [key: string]: {
